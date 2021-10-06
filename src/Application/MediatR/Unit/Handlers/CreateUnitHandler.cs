@@ -25,12 +25,10 @@ namespace Application.MediatR.Unit.Handlers
 
         public async Task<Domain.Entities.Unit> Handle(CreateUnitCommand request, CancellationToken cancellationToken)
         {
-            var unit = await _mediator.Send(new GetUnitByNameQuery(request.Name));
-
-            if (unit != null)
+            if (await _mediator.Send(new DoesUnitExistsByNameQuery(request.Name)))
                 throw new EntityAlreadyExistsException("Unit");
 
-            unit = new Domain.Entities.Unit { Name = request.Name };
+            var unit = new Domain.Entities.Unit { Name = request.Name };
             _context.Units.Add(unit);
 
             await _context.SaveChangesAsync(cancellationToken);
