@@ -1,4 +1,4 @@
-﻿namespace Domain.Common
+﻿namespace FoodPlanner.Domain.Common
 {
     public abstract class BaseEntity
     {

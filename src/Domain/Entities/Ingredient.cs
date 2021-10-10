@@ -1,6 +1,6 @@
-﻿using Domain.Common;
+﻿using FoodPlanner.Domain.Common;
 
-namespace Domain.Entities
+namespace FoodPlanner.Domain.Entities
 {
     public class Ingredient : BaseEntity
     {

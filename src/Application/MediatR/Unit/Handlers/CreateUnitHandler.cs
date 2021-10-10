@@ -1,16 +1,12 @@
-﻿using Application.Common.Exceptions;
-using Application.Common.Interfaces;
-using Application.MediatR.Unit.Commands;
-using Application.MediatR.Unit.Queries;
+﻿using FoodPlanner.Application.Common.Exceptions;
+using FoodPlanner.Application.Common.Interfaces;
+using FoodPlanner.Application.MediatR.Unit.Commands;
+using FoodPlanner.Application.MediatR.Unit.Queries;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.MediatR.Unit.Handlers
+namespace FoodPlanner.Application.MediatR.Unit.Handlers
 {
     public class CreateUnitHandler : IRequestHandler<CreateUnitCommand, Domain.Entities.Unit>
     {

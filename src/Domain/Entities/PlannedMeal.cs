@@ -1,7 +1,7 @@
-﻿using Domain.Common;
+﻿using FoodPlanner.Domain.Common;
 using System;
 
-namespace Domain.Entities
+namespace FoodPlanner.Domain.Entities
 {
     public class PlannedMeal : BaseEntity
     {

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Common.Exceptions
+namespace FoodPlanner.Application.Common.Exceptions
 {
     public class EntityAlreadyExistsException : Exception
     {
