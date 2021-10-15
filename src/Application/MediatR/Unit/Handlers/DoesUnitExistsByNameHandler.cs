@@ -14,6 +14,6 @@ namespace FoodPlanner.Application.MediatR.Unit.Handlers
         public DoesUnitExistsByNameHandler(IApplicationDbContext context) => _context = context;
 
         public async Task<bool> Handle(DoesUnitExistsByNameQuery request, CancellationToken cancellationToken)
-            => await _context.Units.AnyAsync(x => x.Name.ToLowerInvariant().Equals(request.Name.ToLowerInvariant()));
+            => await _context.Units.AnyAsync(x => x.Name.ToLower().Equals(request.Name.ToLower()));
     }
 }
