@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using FoodPlanner.Application;
 using FoodPlanner.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace FoodPlanner.WebApi
 {
@@ -24,7 +26,9 @@ namespace FoodPlanner.WebApi
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodPlanner WebApi", Version = "v1" });

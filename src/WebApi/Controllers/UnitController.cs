@@ -18,7 +18,7 @@ namespace FoodPlanner.WebApi.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateUnitAsync(int id)
+        public async Task<IActionResult> UpdateUnitAsync([FromBody] UpdateUnit @params, int id)
         {
             throw new NotImplementedException();
         }
