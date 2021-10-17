@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 namespace FoodPlanner.WebApi.Controllers
 {
     [ApiController]
-    [Route("api")]
     public class ApiControllerBase : ControllerBase
     {
         private ISender _mediator;

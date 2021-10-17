@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
 {
-    [Route("units")]
+    [Route("webapi/units")]
     public class UnitController : ApiControllerBase
     {
         [HttpPost]
@@ -32,6 +32,14 @@ namespace FoodPlanner.WebApi.Controllers
             var unit = await Mediator.Send(new GetUnitByIdQuery(id));
 
             return Ok(unit);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUnitsAsync()
+        {
+            var units = await Mediator.Send(new GetUnitsQuery());
+
+            return Ok(units);
         }
     }
 }
