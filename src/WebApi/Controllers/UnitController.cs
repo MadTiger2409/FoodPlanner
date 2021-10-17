@@ -1,4 +1,5 @@
 ﻿using FoodPlanner.Application.MediatR.Unit.Commands;
+using FoodPlanner.Application.MediatR.Unit.Queries;
 using FoodPlanner.WebApi.ActionParameters.Unit;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,13 +21,17 @@ namespace FoodPlanner.WebApi.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateUnitAsync([FromBody] UpdateUnit @params, int id)
         {
-            throw new NotImplementedException();
+            var unit = await Mediator.Send(new UpdateUnitCommand(id, @params.Name));
+
+            return Ok(unit);
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetUnitAsync(int id)
         {
-            throw new NotImplementedException();
+            var unit = await Mediator.Send(new GetUnitByIdQuery(id));
+
+            return Ok(unit);
         }
     }
 }

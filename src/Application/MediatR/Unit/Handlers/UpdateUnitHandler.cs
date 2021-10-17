@@ -8,25 +8,26 @@ using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.Unit.Handlers
 {
-    public class CreateUnitHandler : IRequestHandler<CreateUnitCommand, Domain.Entities.Unit>
+    public class UpdateUnitHandler : IRequestHandler<UpdateUnitCommand, Domain.Entities.Unit>
     {
         private readonly IApplicationDbContext _context;
         private readonly ISender _mediator;
 
-        public CreateUnitHandler(IApplicationDbContext dbContext, ISender mediator)
+        public UpdateUnitHandler(IApplicationDbContext context, ISender mediator)
         {
-            _context = dbContext;
+            _context = context;
             _mediator = mediator;
         }
 
-        public async Task<Domain.Entities.Unit> Handle(CreateUnitCommand request, CancellationToken cancellationToken)
+        public async Task<Domain.Entities.Unit> Handle(UpdateUnitCommand request, CancellationToken cancellationToken)
         {
             if (await _mediator.Send(new DoesUnitExistsByNameQuery(request.Name)))
                 throw new EntityAlreadyExistsException($"{request.Name}");
 
-            var unit = new Domain.Entities.Unit { Name = request.Name };
-            _context.Units.Add(unit);
+            var unit = await _mediator.Send(new GetUnitByIdQuery(request.Id));
+            unit.Name = request.Name;
 
+            _context.Units.Update(unit);
             await _context.SaveChangesAsync(cancellationToken);
 
             return unit;
