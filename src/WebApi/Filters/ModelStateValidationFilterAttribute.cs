@@ -19,13 +19,9 @@ namespace FoodPlanner.WebApi.Filters
                         .Select(v => v.ErrorMessage)
                         .ToList();
 
-                var responseObj = new
-                {
-                    Title = "The uploaded model is invalid",
-                    Detail = errors
-                };
+                var details = new DetailedInformationObject("The uploaded model is invalid", errors);
 
-                context.Result = new ObjectResult(responseObj);
+                context.Result = new ObjectResult(details);
                 context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             }
         }

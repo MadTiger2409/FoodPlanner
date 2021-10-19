@@ -8,5 +8,8 @@ namespace FoodPlanner.Application.Common.Exceptions
 {
     public class EntityNotFoundException : Exception
     {
+        public EntityNotFoundException(string propertyName) : base($"Couldn't find entity with given {propertyName.ToLower()}.")
+        {
+        }
     }
 }

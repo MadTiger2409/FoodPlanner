@@ -45,12 +45,7 @@ namespace FoodPlanner.WebApi.Filters
         private void HandleEntityAlreadyExistsException(ExceptionContext context)
         {
             var exception = context.Exception as EntityAlreadyExistsException;
-
-            var details = new ProblemDetails
-            {
-                Title = "Entity already exists",
-                Detail = exception.Message,
-            };
+            var details = new DetailedInformationObject("Entity already exists", exception.Message);
 
             context.Result = new ObjectResult(details);
             context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
@@ -60,12 +55,7 @@ namespace FoodPlanner.WebApi.Filters
         private void HandleEntityNotFoundException(ExceptionContext context)
         {
             var exception = context.Exception as EntityNotFoundException;
-
-            var details = new ProblemDetails
-            {
-                Title = "Entity not found",
-                Detail = exception.Message,
-            };
+            var details = new DetailedInformationObject("Entity not found", exception.Message);
 
             context.Result = new NotFoundObjectResult(details);
             context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
@@ -74,11 +64,7 @@ namespace FoodPlanner.WebApi.Filters
 
         private void HandleUnknownException(ExceptionContext context)
         {
-            var details = new ProblemDetails
-            {
-                Title = "Something bad happened",
-                Detail = "Server encountered a problem while executing the request"
-            };
+            var details = new DetailedInformationObject("Something bad happened", "Server encountered a problem while executing the request.");
 
             context.Result = new ObjectResult(details);
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
