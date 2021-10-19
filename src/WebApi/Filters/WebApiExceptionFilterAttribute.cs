@@ -32,15 +32,10 @@ namespace FoodPlanner.WebApi.Filters
         private void HandleException(ExceptionContext context)
         {
             Type type = context.Exception.GetType();
+
             if (_exceptionHandlers.ContainsKey(type))
             {
                 _exceptionHandlers[type].Invoke(context);
-                return;
-            }
-
-            if (!context.ModelState.IsValid)
-            {
-                HandleInvalidModelStateException(context);
                 return;
             }
 
@@ -72,17 +67,22 @@ namespace FoodPlanner.WebApi.Filters
                 Detail = exception.Message,
             };
 
-            context.Result = new ObjectResult(details);
+            context.Result = new NotFoundObjectResult(details);
             context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
             context.ExceptionHandled = true;
         }
 
-        private void HandleInvalidModelStateException(ExceptionContext context)
-        {
-        }
-
         private void HandleUnknownException(ExceptionContext context)
         {
+            var details = new ProblemDetails
+            {
+                Title = "Something bad happened",
+                Detail = "Server encountered a problem while executing the request"
+            };
+
+            context.Result = new ObjectResult(details);
+            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.ExceptionHandled = true;
         }
     }
 }
