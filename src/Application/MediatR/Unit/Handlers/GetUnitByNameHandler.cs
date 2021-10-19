@@ -1,4 +1,5 @@
-﻿using FoodPlanner.Application.Common.Interfaces;
+﻿using FoodPlanner.Application.Common.Exceptions;
+using FoodPlanner.Application.Common.Interfaces;
 using FoodPlanner.Application.MediatR.Unit.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,13 @@ namespace FoodPlanner.Application.MediatR.Unit.Handlers
         public GetUnitByNameHandler(IApplicationDbContext context) => _context = context;
 
         public async Task<Domain.Entities.Unit> Handle(GetUnitByNameQuery request, CancellationToken cancellationToken)
-            => await _context.Units.SingleAsync(x => x.Name.ToLowerInvariant().Equals(request.Name.ToLowerInvariant()));
+        {
+            var unit = await _context.Units.SingleOrDefaultAsync(x => x.Name.ToLowerInvariant().Equals(request.Name.ToLowerInvariant()));
+
+            if (unit == null)
+                throw new EntityNotFoundException(nameof(request.Name));
+
+            return unit;
+        }
     }
 }
