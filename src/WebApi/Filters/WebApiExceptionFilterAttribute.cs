@@ -54,19 +54,27 @@ namespace FoodPlanner.WebApi.Filters
             var details = new ProblemDetails
             {
                 Title = "Entity already exists",
-                Detail = exception.Message
+                Detail = exception.Message,
             };
 
-            context.Result = new ObjectResult(details)
-            {
-                StatusCode = StatusCodes.Status400BadRequest
-            };
-
+            context.Result = new ObjectResult(details);
+            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.ExceptionHandled = true;
         }
 
         private void HandleEntityNotFoundException(ExceptionContext context)
         {
+            var exception = context.Exception as EntityNotFoundException;
+
+            var details = new ProblemDetails
+            {
+                Title = "Entity not found",
+                Detail = exception.Message,
+            };
+
+            context.Result = new ObjectResult(details);
+            context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.ExceptionHandled = true;
         }
 
         private void HandleInvalidModelStateException(ExceptionContext context)
