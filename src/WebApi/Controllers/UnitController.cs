@@ -2,7 +2,6 @@
 using FoodPlanner.Application.MediatR.Unit.Queries;
 using FoodPlanner.WebApi.ActionParameters.Unit;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
