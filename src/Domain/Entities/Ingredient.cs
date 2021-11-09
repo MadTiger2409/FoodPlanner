@@ -7,7 +7,9 @@ namespace FoodPlanner.Domain.Entities
         public float Amount { get; set; }
         public int ProductId { get; set; }
         public int UnitId { get; set; }
+        public int MealId { get; set; }
         public Product Product { get; set; }
         public Unit Unit { get; set; }
+        public Meal Meal { get; set; }
     }
 }
