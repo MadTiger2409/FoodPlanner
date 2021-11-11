@@ -6,17 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.Common.Product
+namespace FoodPlanner.Domain.UnitTests.Common
 {
-    public class DataWithoutIngredientsAttribute : DataAttribute
+    public class PositiveIdAttribute : DataAttribute
     {
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
-            yield return new object[]
-            {
-                1,
-                "Milk"
-            };
+            yield return new object[] { 1 };
+            yield return new object[] { 68 };
+            yield return new object[] { 976187 };
         }
     }
 }
