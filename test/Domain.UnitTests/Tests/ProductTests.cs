@@ -13,34 +13,46 @@ namespace FoodPlanner.Domain.UnitTests.Tests
 {
     public class ProductTests
     {
-        [Theory]
-        [CorrectDataWithoutIngredients]
-        public void Succed_To_Create_Product_Without_Ingredients(int id, string name)
+        [Fact]
+        public void Succed_With_Creating_Product()
         {
             // Arrange
             Product product = null;
 
             // Act
-            product = new Product { Id = id, Name = name };
+            product = new Product();
 
             // Assert
             product.Should().NotBeNull();
-            product.Id.Should().Be(id);
-            product.Name.Should().Be(name);
+            product.Id.Should().Be(default);
+            product.Name.Should().Be(default);
             product.Ingredients.Should().NotBeNull();
         }
 
-        //TODO Add test for correct data and ingredients
+        [Theory]
+        [IngredientsForProduct]
+        public void Succed_With_Setting_Ingredients_For_Product(List<Ingredient> ingredients)
+        {
+            // Arrange
+            Product product = new Product();
+
+            // Act
+            product.Ingredients = ingredients;
+
+            // Assert
+            product.Ingredients.Should().NotBeNullOrEmpty();
+            product.Ingredients.Should().BeSameAs(ingredients);
+        }
 
         [Theory]
         [PositiveId]
-        public void Succed_To_Create_Product_With_Positive_Id(int id)
+        public void Succed_With_Setting_Positive_Id(int id)
         {
             // Arrange
-            Product product = null;
+            Product product = new Product();
 
             // Act
-            product = new Product { Id = id, Name = "Milk" };
+            product.Id = id;
 
             // Assert
             product.Should().NotBeNull();
@@ -49,28 +61,28 @@ namespace FoodPlanner.Domain.UnitTests.Tests
 
         [Theory]
         [NotPositiveId]
-        public void Failed_To_Create_Product_With_Not_Positive_Id(int id)
+        public void Failed_With_Setting_Not_Positive_Id(int id)
         {
             // Arrange
-            Product product = null;
+            Product product = new Product();
 
             // Act
-            Action action = () => product = new Product { Id = id, Name = "Milk" };
+            Action action = () => product.Id = id;
 
             // Assert
-            product.Should().BeNull();
+            product.Id.Should().Be(default);
             action.Should().Throw<ArgumentException>();
         }
 
         [Theory]
         [CorrectProductName]
-        public void Succed_To_Create_Product_With_Correct_Name(string name)
+        public void Succed_With_Setting_Correct_Name(string name)
         {
             // Arrange
-            Product product = null;
+            Product product = new Product();
 
             // Act
-            product = new Product { Id = 1, Name = name };
+            product.Name = name;
 
             // Assert
             product.Should().NotBeNull();
@@ -79,16 +91,16 @@ namespace FoodPlanner.Domain.UnitTests.Tests
 
         [Theory]
         [IncorrectProductName]
-        public void Failed_To_Create_Product_With_Incorrect_Name(string name)
+        public void Failed_With_Setting_Incorrect_Name(string name)
         {
             // Arrange
-            Product product = null;
+            Product product = new Product();
 
             // Act
-            Action action = () => product = new Product { Id = 1, Name = name };
+            Action action = () => product.Name = name;
 
             // Assert
-            product.Should().BeNull();
+            product.Name.Should().Be(default);
             action.Should().Throw<ArgumentException>();
         }
     }
