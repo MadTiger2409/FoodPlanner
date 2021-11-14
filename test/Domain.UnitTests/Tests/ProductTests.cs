@@ -30,6 +30,8 @@ namespace FoodPlanner.Domain.UnitTests.Tests
             product.Ingredients.Should().NotBeNull();
         }
 
+        //TODO Add test for correct data and ingredients
+
         [Theory]
         [PositiveId]
         public void Succed_To_Create_Product_With_Positive_Id(int id)
@@ -54,6 +56,36 @@ namespace FoodPlanner.Domain.UnitTests.Tests
 
             // Act
             Action action = () => product = new Product { Id = id, Name = "Milk" };
+
+            // Assert
+            product.Should().BeNull();
+            action.Should().Throw<ArgumentException>();
+        }
+
+        [Theory]
+        [CorrectProductName]
+        public void Succed_To_Create_Product_With_Correct_Name(string name)
+        {
+            // Arrange
+            Product product = null;
+
+            // Act
+            product = new Product { Id = 1, Name = name };
+
+            // Assert
+            product.Should().NotBeNull();
+            product.Name.Should().NotBeNullOrWhiteSpace().And.Be(name);
+        }
+
+        [Theory]
+        [IncorrectProductName]
+        public void Failed_To_Create_Product_With_Incorrect_Name(string name)
+        {
+            // Arrange
+            Product product = null;
+
+            // Act
+            Action action = () => product = new Product { Id = 1, Name = name };
 
             // Assert
             product.Should().BeNull();

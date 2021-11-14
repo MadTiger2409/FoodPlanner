@@ -9,10 +9,11 @@ namespace FoodPlanner.Domain.Common
         public int Id
         {
             get => id;
+
             set
             {
                 if (value < 1)
-                    throw new ArgumentException("Id must be positive.");
+                    throw new ArgumentException("'Id' must be positive.");
 
                 id = value;
             }

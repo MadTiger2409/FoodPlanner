@@ -8,12 +8,13 @@ using Xunit.Sdk;
 
 namespace FoodPlanner.Domain.UnitTests.Common.Product
 {
-    public class CorrectDataWithoutIngredientsAttribute : DataAttribute
+    public class CorrectProductNameAttribute : DataAttribute
     {
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
-            yield return new object[] { 1, "Milk" };
-            yield return new object[] { 785, "Ćwikła" };
+            yield return new object[] { "Milk" };
+            yield return new object[] { "Gęś" };
+            yield return new object[] { "die Würstchen" };
         }
     }
 }
