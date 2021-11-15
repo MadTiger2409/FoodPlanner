@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using FoodPlanner.Domain.Entities;
 using FoodPlanner.Domain.UnitTests.Common;
-using FoodPlanner.Domain.UnitTests.Common.Product;
+using FoodPlanner.Domain.UnitTests.Common.Unit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,37 +11,37 @@ using Xunit;
 
 namespace FoodPlanner.Domain.UnitTests.Tests
 {
-    public class ProductTests
+    public class UnitTests
     {
         [Fact]
-        public void Succed_With_Creating_Product()
+        public void Succed_With_Creating_Unit()
         {
             // Arrange
-            Product product = null;
+            Unit unit = null;
 
             // Act
-            product = new Product();
+            unit = new Unit();
 
             // Assert
-            product.Should().NotBeNull();
-            product.Id.Should().Be(default);
-            product.Name.Should().Be(default);
-            product.Ingredients.Should().NotBeNull();
+            unit.Should().NotBeNull();
+            unit.Id.Should().Be(default);
+            unit.Name.Should().Be(default);
+            unit.Ingredients.Should().NotBeNull();
         }
 
         [Theory]
         [IngredientsMinimumData]
-        public void Succed_With_Setting_Ingredients_For_Product(List<Ingredient> ingredients)
+        public void Succed_With_Setting_Ingredients_For_Unit(List<Ingredient> ingredients)
         {
             // Arrange
-            Product product = new Product();
+            Unit unit = new Unit();
 
             // Act
-            product.Ingredients = ingredients;
+            unit.Ingredients = ingredients;
 
             // Assert
-            product.Ingredients.Should().NotBeNullOrEmpty();
-            product.Ingredients.Should().BeSameAs(ingredients);
+            unit.Ingredients.Should().NotBeNullOrEmpty();
+            unit.Ingredients.Should().BeSameAs(ingredients);
         }
 
         [Theory]
@@ -49,14 +49,14 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Positive_Id(int id)
         {
             // Arrange
-            Product product = new Product();
+            Unit unit = new Unit();
 
             // Act
-            product.Id = id;
+            unit.Id = id;
 
             // Assert
-            product.Should().NotBeNull();
-            product.Id.Should().BePositive().And.Be(id);
+            unit.Should().NotBeNull();
+            unit.Id.Should().BePositive().And.Be(id);
         }
 
         [Theory]
@@ -64,29 +64,29 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Not_Positive_Id(int id)
         {
             // Arrange
-            Product product = new Product();
+            Unit unit = new Unit();
 
             // Act
-            Action action = () => product.Id = id;
+            Action action = () => unit.Id = id;
 
             // Assert
-            product.Id.Should().Be(default);
+            unit.Id.Should().Be(default);
             action.Should().Throw<ArgumentException>();
         }
 
         [Theory]
-        [CorrectProductName]
+        [CorrectUnitName]
         public void Succed_With_Setting_Correct_Name(string name)
         {
             // Arrange
-            Product product = new Product();
+            Unit unit = new Unit();
 
             // Act
-            product.Name = name;
+            unit.Name = name;
 
             // Assert
-            product.Should().NotBeNull();
-            product.Name.Should().NotBeNullOrWhiteSpace().And.Be(name);
+            unit.Should().NotBeNull();
+            unit.Name.Should().NotBeNullOrWhiteSpace().And.Be(name);
         }
 
         [Theory]
@@ -94,13 +94,13 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Incorrect_Name(string name)
         {
             // Arrange
-            Product product = new Product();
+            Unit unit = new Unit();
 
             // Act
-            Action action = () => product.Name = name;
+            Action action = () => unit.Name = name;
 
             // Assert
-            product.Name.Should().Be(default);
+            unit.Name.Should().Be(default);
             action.Should().Throw<ArgumentException>();
         }
     }

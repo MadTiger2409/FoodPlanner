@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.Common.Product
+namespace FoodPlanner.Domain.UnitTests.Common
 {
-    public class IngredientsForProductAttribute : DataAttribute
+    public class IngredientsMinimumDataAttribute : DataAttribute
     {
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {

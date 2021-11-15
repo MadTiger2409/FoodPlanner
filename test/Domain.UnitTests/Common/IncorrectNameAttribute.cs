@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.Common.Product
+namespace FoodPlanner.Domain.UnitTests.Common
 {
-    public class IncorrectProductNameAttribute : DataAttribute
+    public class IncorrectNameAttribute : DataAttribute
     {
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
