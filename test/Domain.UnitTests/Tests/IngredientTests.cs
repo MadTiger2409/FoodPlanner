@@ -10,13 +10,13 @@ namespace FoodPlanner.Domain.UnitTests.Tests
     public class IngredientTests
     {
         [Fact]
-        public void Succed_With_Creating_Unit()
+        public void Succed_With_Creating_Ingredient()
         {
             // Arrange
             Ingredient ingredient = null;
 
             // Act
-            ingredient = new Ingredient();
+            ingredient = new();
 
             // Assert
             ingredient.Should().NotBeNull();
@@ -31,7 +31,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Correct_Amount_Value(float amount)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             ingredient.Amount = amount;
@@ -46,7 +46,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Incorrect_Amount_Values(float amount)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             Action action = () => ingredient.Amount = amount;
@@ -61,7 +61,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Positive_Id(int id)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             ingredient.Id = id;
@@ -76,7 +76,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Not_Positive_Id(int id)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             Action action = () => ingredient.Id = id;
@@ -91,7 +91,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Positive_ProductId(int id)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             ingredient.ProductId = id;
@@ -106,7 +106,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Not_Positive_ProductId(int id)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             Action action = () => ingredient.ProductId = id;
@@ -121,7 +121,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Positive_UnitId(int id)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             ingredient.UnitId = id;
@@ -136,7 +136,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Not_Positive_UnitId(int id)
         {
             // Arrange
-            Ingredient ingredient = new Ingredient();
+            Ingredient ingredient = new();
 
             // Act
             Action action = () => ingredient.UnitId = id;

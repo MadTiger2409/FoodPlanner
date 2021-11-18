@@ -20,7 +20,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
             Product product = null;
 
             // Act
-            product = new Product();
+            product = new();
 
             // Assert
             product.Should().NotBeNull();
@@ -34,7 +34,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Ingredients_For_Product(List<Ingredient> ingredients)
         {
             // Arrange
-            Product product = new Product();
+            Product product = new();
 
             // Act
             product.Ingredients = ingredients;
@@ -49,7 +49,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Positive_Id(int id)
         {
             // Arrange
-            Product product = new Product();
+            Product product = new();
 
             // Act
             product.Id = id;
@@ -64,7 +64,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Not_Positive_Id(int id)
         {
             // Arrange
-            Product product = new Product();
+            Product product = new();
 
             // Act
             Action action = () => product.Id = id;
@@ -79,7 +79,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Succed_With_Setting_Correct_Name(string name)
         {
             // Arrange
-            Product product = new Product();
+            Product product = new();
 
             // Act
             product.Name = name;
@@ -94,7 +94,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         public void Failed_With_Setting_Incorrect_Name(string name)
         {
             // Arrange
-            Product product = new Product();
+            Product product = new();
 
             // Act
             Action action = () => product.Name = name;
