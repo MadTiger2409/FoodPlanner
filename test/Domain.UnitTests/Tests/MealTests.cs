@@ -31,7 +31,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
 
         [Theory]
         [PlannedMealsMinimumData]
-        public void Succed_With_Setting_Ingredients_For_Meal(List<PlannedMeal> plannedMeals)
+        public void Succed_With_Setting_PlannedMeals_For_Meal(List<PlannedMeal> plannedMeals)
         {
             // Arrange
             Meal meal = new();
@@ -40,8 +40,21 @@ namespace FoodPlanner.Domain.UnitTests.Tests
             meal.PlannedMeals = plannedMeals;
 
             // Assert
-            meal.PlannedMeals.Should().NotBeNullOrEmpty();
-            meal.Should().BeSameAs(plannedMeals);
+            meal.PlannedMeals.Should().NotBeNullOrEmpty().And.BeSameAs(plannedMeals);
+        }
+
+        [Theory]
+        [IngredientsMinimumData]
+        public void Succed_With_Setting_Ingredients_For_Meal(List<Ingredient> ingredients)
+        {
+            // Arrange
+            Meal meal = new();
+
+            // Act
+            meal.Ingredients = ingredients;
+
+            // Assert
+            meal.Ingredients.Should().NotBeNullOrEmpty().And.BeSameAs(ingredients);
         }
 
         [Theory]

@@ -40,8 +40,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
             product.Ingredients = ingredients;
 
             // Assert
-            product.Ingredients.Should().NotBeNullOrEmpty();
-            product.Ingredients.Should().BeSameAs(ingredients);
+            product.Ingredients.Should().NotBeNullOrEmpty().And.BeSameAs(ingredients);
         }
 
         [Theory]
