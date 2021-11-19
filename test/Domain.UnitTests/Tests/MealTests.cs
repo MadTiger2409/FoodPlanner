@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FoodPlanner.Domain.Entities;
 using FoodPlanner.Domain.UnitTests.Common;
+using FoodPlanner.Domain.UnitTests.Common.Meal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +85,36 @@ namespace FoodPlanner.Domain.UnitTests.Tests
 
             // Assert
             meal.Id.Should().Be(default);
+            action.Should().Throw<ArgumentException>();
+        }
+
+        [Theory]
+        [CorrectMealName]
+        public void Succed_With_Setting_Correct_Name(string name)
+        {
+            // Arrange
+            Meal meal = new();
+
+            // Act
+            meal.Name = name;
+
+            // Assert
+            meal.Should().NotBeNull();
+            meal.Name.Should().NotBeNullOrWhiteSpace().And.Be(name);
+        }
+
+        [Theory]
+        [IncorrectName]
+        public void Failed_With_Setting_Incorrect_Name(string name)
+        {
+            // Arrange
+            Meal meal = new();
+
+            // Act
+            Action action = () => meal.Name = name;
+
+            // Assert
+            meal.Name.Should().Be(default);
             action.Should().Throw<ArgumentException>();
         }
     }
