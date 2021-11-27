@@ -10,17 +10,17 @@ namespace FoodPlanner.WebApi.Controllers
     public class UnitController : ApiControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> CreateUnitAsync([FromBody] CreateUnit @params)
+        public async Task<IActionResult> CreateUnitAsync([FromBody] CreateUnit command)
         {
-            var unit = await Mediator.Send(new CreateUnitCommand(@params.Name));
+            var unit = await Mediator.Send(new CreateUnitCommand(command.Name));
 
             return Created($"{Request.Host}{Request.Path}/{unit.Id}", unit);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateUnitAsync([FromBody] UpdateUnit @params, int id)
+        public async Task<IActionResult> UpdateUnitAsync([FromBody] UpdateUnit command, int id)
         {
-            var unit = await Mediator.Send(new UpdateUnitCommand(id, @params.Name));
+            var unit = await Mediator.Send(new UpdateUnitCommand(id, command.Name));
 
             return Ok(unit);
         }

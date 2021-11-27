@@ -25,7 +25,7 @@ namespace FoodPlanner.Application.MediatR.Product.Handlers
 
         public async Task<Domain.Entities.Product> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            if (await _mediator.Send(new DoesProductExistsByNameQuery(request.Name)))
+            if (await _mediator.Send(new DoesProductExistByNameQuery(request.Name)))
                 throw new EntityAlreadyExistsException($"{request.Name}");
 
             var product = await _mediator.Send(new GetProductByIdQuery(request.Id));

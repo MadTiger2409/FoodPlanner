@@ -1,8 +1,7 @@
 ﻿using FoodPlanner.Application.MediatR.Meal.Queries;
+using FoodPlanner.WebApi.ActionParameters.Meal;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
@@ -10,6 +9,12 @@ namespace FoodPlanner.WebApi.Controllers
     [Route("webapi/meals")]
     public class MealController : ApiControllerBase
     {
+        [HttpPost]
+        public async Task<IActionResult> CreateMealAsync([FromBody] CreateMeal command)
+        {
+            throw new Exception();
+        }
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetMealByIdAsync(int id)
         {
