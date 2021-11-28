@@ -1,7 +1,7 @@
-﻿using FoodPlanner.Application.MediatR.Meal.Queries;
+﻿using FoodPlanner.Application.MediatR.Meal.Commands;
+using FoodPlanner.Application.MediatR.Meal.Queries;
 using FoodPlanner.WebApi.ActionParameters.Meal;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
@@ -12,7 +12,17 @@ namespace FoodPlanner.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMealAsync([FromBody] CreateMeal command)
         {
-            throw new Exception();
+            var meal = await Mediator.Send(new CreateMealCommand(command.Name));
+
+            return Created($"{Request.Host}{Request.Path}/{meal.Id}", meal);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateMealAsync([FromBody] UpdateMeal command, int id)
+        {
+            var meal = await Mediator.Send(new UpdateMealCommand(id, command.Name));
+
+            return Ok(meal);
         }
 
         [HttpGet("{id:int}")]
