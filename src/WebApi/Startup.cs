@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace FoodPlanner.WebApi
 {
@@ -32,7 +33,9 @@ namespace FoodPlanner.WebApi
             {
                 options.Filters.Add<WebApiExceptionFilterAttribute>();
                 options.Filters.Add<ModelStateValidationFilterAttribute>();
-            }).AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+            })
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
