@@ -1,6 +1,7 @@
 ﻿using FoodPlanner.Application.Common.Interfaces;
 using FoodPlanner.Application.MediatR.Ingredient.Commands;
 using FoodPlanner.Application.MediatR.Meal.Queries;
+using FoodPlanner.Domain.Comparers;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,10 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
         public async Task<List<Domain.Entities.Ingredient>> Handle(CreateIngredientsCommand request, CancellationToken cancellationToken)
         {
             var meal = await _mediator.Send(new GetMealByIdQuery(request.MealId));
+            var duplicates = meal.Ingredients.Intersect(request.Ingredients, new IngredientWithoutAmountComparer());
 
-            // check if there is a duplicated ingredient and then throw exception or do a sum of values
+            if (duplicates.Any())
+                throw new ArgumentException($"Meal can't have duplicated ingredients.");
 
             if (50 - meal.Ingredients.Count < request.Ingredients.Count)
                 throw new ArgumentException($"Ingredients list is too long. Meal can't have more than 50 ingredients in total.");
