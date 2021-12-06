@@ -19,6 +19,7 @@ namespace FoodPlanner.WebApi.Filters
             {
                 { typeof(EntityAlreadyExistsException), HandleEntityAlreadyExistsException },
                 { typeof(EntityNotFoundException), HandleEntityNotFoundException },
+                { typeof(ArgumentException), HandleBadArgumentException },
             };
         }
 
@@ -59,6 +60,16 @@ namespace FoodPlanner.WebApi.Filters
 
             context.Result = new NotFoundObjectResult(details);
             context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.ExceptionHandled = true;
+        }
+
+        private void HandleBadArgumentException(ExceptionContext context)
+        {
+            var exception = context.Exception as ArgumentException;
+            var details = new DetailedInformationObject("Invalid argument", exception.Message);
+
+            context.Result = new ObjectResult(details);
+            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.ExceptionHandled = true;
         }
 
