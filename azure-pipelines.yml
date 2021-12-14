@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: 'Build Domain module'
+- stage: Build_Domain_module
   jobs:
   - job: Restore_nuget_packages
     steps:
@@ -28,7 +28,7 @@ stages:
         command: 'build'
         projects: '**/Domain.csproj'
         feedsToUse: 'select'
-- stage: 'Run unit tests for Domain module'
+- stage: Run_unit_tests_for_Domain_module
   jobs:
   - job: Restore_nuget_packages
     steps:
