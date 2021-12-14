@@ -9,20 +9,42 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  buildConfiguration: 'Unit tests build'
+stages:
+- stage: Build Domain module
+  jobs:
+  - job: Restore nuget packages
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore packages for Domain module'
+      inputs:
+        command: 'restore'
+        projects: '**/Domain.csproj'
+        feedsToUse: 'select'
+  - job: Build Domain module
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Build Domain module'
+      inputs:
+        command: 'build'
+        projects: '**/Domain.csproj'
+        feedsToUse: 'select'
+- stage: Run unit tests for Domain module
+  jobs:
+  - job: Restore nuget packages
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore packages for Domain unit tests'
+      inputs:
+        command: 'restore'
+        projects: '**/Domain.UnitTests.csproj'
+        feedsToUse: 'select'
+  - job: Run Domain unit tests
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Run Domain unit tests'
+      inputs:
+        command: 'test'
+        projects: '**/Domain.UnitTests.csproj'
+        feedsToUse: 'select'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Restore packages for Domain unit tests'
-  inputs:
-    command: 'restore'
-    projects: '**/Domain.UnitTests.csproj'
-    feedsToUse: 'select'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run Domain unit tests'
-  inputs:
-    command: 'test'
-    projects: '**/Domain.UnitTests.csproj'
-    feedsToUse: 'select'
