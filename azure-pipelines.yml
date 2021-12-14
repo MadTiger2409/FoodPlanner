@@ -1,0 +1,50 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  jobs:
+  - job: Restore_nuget_packages
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore packages for Domain module'
+      inputs:
+        command: 'restore'
+        projects: '**/Domain.csproj'
+        feedsToUse: 'select'
+  - job: Build_Domain_module
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Build Domain module'
+      inputs:
+        command: 'build'
+        projects: '**/Domain.csproj'
+        feedsToUse: 'select'
+- stage: Test
+  jobs:
+  - job: Restore_nuget_packages
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore packages for Domain unit tests'
+      inputs:
+        command: 'restore'
+        projects: '**/Domain.UnitTests.csproj'
+        feedsToUse: 'select'
+  - job: Run_Domain_unit_tests
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Run Domain unit tests'
+      inputs:
+        command: 'test'
+        projects: '**/Domain.UnitTests.csproj'
+        feedsToUse: 'select'
+
+
