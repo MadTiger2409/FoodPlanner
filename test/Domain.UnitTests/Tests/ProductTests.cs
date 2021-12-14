@@ -4,9 +4,6 @@ using FoodPlanner.Domain.UnitTests.Common;
 using FoodPlanner.Domain.UnitTests.Common.Product;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace FoodPlanner.Domain.UnitTests.Tests
@@ -41,36 +38,6 @@ namespace FoodPlanner.Domain.UnitTests.Tests
 
             // Assert
             product.Ingredients.Should().NotBeNullOrEmpty().And.BeSameAs(ingredients);
-        }
-
-        [Theory]
-        [PositiveId]
-        public void Succed_With_Setting_Positive_Id(int id)
-        {
-            // Arrange
-            Product product = new();
-
-            // Act
-            product.Id = id;
-
-            // Assert
-            product.Should().NotBeNull();
-            product.Id.Should().BePositive().And.Be(id);
-        }
-
-        [Theory]
-        [NotPositiveId]
-        public void Failed_With_Setting_Not_Positive_Id(int id)
-        {
-            // Arrange
-            Product product = new();
-
-            // Act
-            Action action = () => product.Id = id;
-
-            // Assert
-            product.Id.Should().Be(default);
-            action.Should().Throw<ArgumentException>();
         }
 
         [Theory]

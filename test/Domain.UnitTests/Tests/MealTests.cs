@@ -59,36 +59,6 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         }
 
         [Theory]
-        [PositiveId]
-        public void Succed_With_Setting_Positive_Id(int id)
-        {
-            // Arrange
-            Meal meal = new();
-
-            // Act
-            meal.Id = id;
-
-            // Assert
-            meal.Should().NotBeNull();
-            meal.Id.Should().BePositive().And.Be(id);
-        }
-
-        [Theory]
-        [NotPositiveId]
-        public void Failed_With_Setting_Not_Positive_Id(int id)
-        {
-            // Arrange
-            Meal meal = new();
-
-            // Act
-            Action action = () => meal.Id = id;
-
-            // Assert
-            meal.Id.Should().Be(default);
-            action.Should().Throw<ArgumentException>();
-        }
-
-        [Theory]
         [CorrectMealName]
         public void Succed_With_Setting_Correct_Name(string name)
         {

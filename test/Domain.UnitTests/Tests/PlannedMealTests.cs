@@ -3,10 +3,6 @@ using FoodPlanner.Domain.Entities;
 using FoodPlanner.Domain.UnitTests.Common;
 using FoodPlanner.Domain.UnitTests.Common.PlannedMeal;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace FoodPlanner.Domain.UnitTests.Tests
@@ -28,66 +24,6 @@ namespace FoodPlanner.Domain.UnitTests.Tests
             plannedMeal.MealId.Should().Be(default);
             plannedMeal.ScheduledFor.Should().Be(default);
             plannedMeal.OrdinalNumber.Should().Be(default);
-        }
-
-        [Theory]
-        [PositiveId]
-        public void Succed_With_Setting_Positive_Id(int id)
-        {
-            // Arrange
-            PlannedMeal plannedMeal = new();
-
-            // Act
-            plannedMeal.Id = id;
-
-            // Assert
-            plannedMeal.Should().NotBeNull();
-            plannedMeal.Id.Should().BePositive().And.Be(id);
-        }
-
-        [Theory]
-        [NotPositiveId]
-        public void Failed_With_Setting_Not_Positive_Id(int id)
-        {
-            // Arrange
-            PlannedMeal plannedMeal = new();
-
-            // Act
-            Action action = () => plannedMeal.Id = id;
-
-            // Assert
-            plannedMeal.Id.Should().Be(default);
-            action.Should().Throw<ArgumentException>();
-        }
-
-        [Theory]
-        [PositiveId]
-        public void Succed_With_Setting_Positive_MealId(int id)
-        {
-            // Arrange
-            PlannedMeal plannedMeal = new();
-
-            // Act
-            plannedMeal.MealId = id;
-
-            // Assert
-            plannedMeal.Should().NotBeNull();
-            plannedMeal.MealId.Should().BePositive().And.Be(id);
-        }
-
-        [Theory]
-        [NotPositiveId]
-        public void Failed_With_Setting_Not_Positive_MealId(int id)
-        {
-            // Arrange
-            PlannedMeal plannedMeal = new();
-
-            // Act
-            Action action = () => plannedMeal.MealId = id;
-
-            // Assert
-            plannedMeal.MealId.Should().Be(default);
-            action.Should().Throw<ArgumentException>();
         }
 
         [Theory]
