@@ -10,9 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Build Domain module
+- stage: 'Build Domain module'
   jobs:
-  - job: Restore nuget packages
+  - job: Restore_nuget_packages
     steps:
     - task: DotNetCoreCLI@2
       displayName: 'Restore packages for Domain module'
@@ -20,7 +20,7 @@ stages:
         command: 'restore'
         projects: '**/Domain.csproj'
         feedsToUse: 'select'
-  - job: Build Domain module
+  - job: Build_Domain_module
     steps:
     - task: DotNetCoreCLI@2
       displayName: 'Build Domain module'
@@ -28,9 +28,9 @@ stages:
         command: 'build'
         projects: '**/Domain.csproj'
         feedsToUse: 'select'
-- stage: Run unit tests for Domain module
+- stage: 'Run unit tests for Domain module'
   jobs:
-  - job: Restore nuget packages
+  - job: Restore_nuget_packages
     steps:
     - task: DotNetCoreCLI@2
       displayName: 'Restore packages for Domain unit tests'
@@ -38,7 +38,7 @@ stages:
         command: 'restore'
         projects: '**/Domain.UnitTests.csproj'
         feedsToUse: 'select'
-  - job: Run Domain unit tests
+  - job: Run_Domain_unit_tests
     steps:
     - task: DotNetCoreCLI@2
       displayName: 'Run Domain unit tests'
