@@ -46,5 +46,12 @@ stages:
         command: 'test'
         projects: '**/Domain.UnitTests.csproj'
         feedsToUse: 'select'
-
-
+        
+    - task: VSTest@2
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\Domain.UnitTests.dll
+          !**\*TestAdapter.dll
+          !**\Domain.UnitTests\obj\**
+        searchFolder: '$(System.DefaultWorkingDirectory)'
