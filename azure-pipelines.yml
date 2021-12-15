@@ -10,9 +10,9 @@ pool:
   vmImage: windows-latest
 
 stages:
-- stage: Build_And_Test
+- stage: Build
   jobs:
-  - job: Build
+  - job: Build_And_Test
     steps:
     - task: DotNetCoreCLI@2
       displayName: 'Restore packages for Domain module'
@@ -28,8 +28,6 @@ stages:
         projects: '**/Domain.csproj'
         feedsToUse: 'select'
         
-  - job: Test
-    steps:
     - task: DotNetCoreCLI@2
       displayName: 'Restore packages for Domain unit tests'
       inputs:
@@ -43,13 +41,13 @@ stages:
         command: 'test'
         projects: '**/Domain.UnitTests.csproj'
         feedsToUse: 'select'
-        
-    - task: VSTest@2
-      inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\Domain.UnitTests.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-          !**\bin\**\ref\**
-        searchFolder: '$(System.DefaultWorkingDirectory)'
+
+#    - task: VSTest@2
+#      inputs:
+#        testSelector: 'testAssemblies'
+#        testAssemblyVer2: |
+#          **\Domain.UnitTests.dll
+#          !**\*TestAdapter.dll
+#          !**\obj\**
+#          !**\bin\**\ref\**
+#        searchFolder: '$(System.DefaultWorkingDirectory)'
