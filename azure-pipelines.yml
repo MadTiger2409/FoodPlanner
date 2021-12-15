@@ -50,5 +50,6 @@ stages:
         testAssemblyVer2: |
           **\Domain.UnitTests.dll
           !**\*TestAdapter.dll
-          !**\Domain.UnitTests\obj\**
+          !**\obj\**
+          !**\bin\**\ref\**
         searchFolder: '$(System.DefaultWorkingDirectory)'
