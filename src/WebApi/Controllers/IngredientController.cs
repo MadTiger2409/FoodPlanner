@@ -19,10 +19,16 @@ namespace FoodPlanner.WebApi.Controllers
             return Created($"{Request.Host}{Request.Path}/", ingredients);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateIngredientAsync([FromBody] UpdateIngredient command, int id)
+        [HttpPut("{ingredientId}")]
+        public async Task<IActionResult> UpdateIngredientAsync([FromBody] UpdateIngredient command, int id, int ingredientId)
         {
-            throw new Exception();
+            var mediatorCommand = (UpdateIngredientCommand)command;
+            mediatorCommand.MealId = id;
+            mediatorCommand.IngredientId = ingredientId;
+
+            var ingredient = await Mediator.Send(mediatorCommand);
+
+            return Ok(ingredient);
         }
     }
 }
