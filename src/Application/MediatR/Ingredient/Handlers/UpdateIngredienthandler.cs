@@ -1,22 +1,22 @@
 ﻿using FoodPlanner.Application.Common.Interfaces;
 using FoodPlanner.Application.MediatR.Ingredient.Commands;
+using FoodPlanner.Application.MediatR.Ingredient.Queries;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 {
-    public class UpdateIngredienthandler : IRequestHandler<UpdateIngredientCommand, Domain.Entities.Ingredient>
+    public class UpdateIngredientHandler : IRequestHandler<UpdateIngredientCommand, Domain.Entities.Ingredient>
     {
         private readonly IApplicationDbContext _context;
+        private readonly ISender _mediator;
 
-        public UpdateIngredienthandler(IApplicationDbContext context)
+        public UpdateIngredientHandler(IApplicationDbContext context, ISender mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
         public async Task<Domain.Entities.Ingredient> Handle(UpdateIngredientCommand request, CancellationToken cancellationToken)
@@ -28,6 +28,7 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
                 Check if unit exists
                 For each check create Mediator query and handler
              */
+            await _mediator.Send(new CanUpdateIngredientQuery(request.UnitId, request.ProductId, request.MealId, request.IngredientId));
 
             throw new Exception();
         }
