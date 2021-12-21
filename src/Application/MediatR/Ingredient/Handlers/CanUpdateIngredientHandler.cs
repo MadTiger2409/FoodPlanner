@@ -1,6 +1,8 @@
 ﻿using FoodPlanner.Application.Common.Exceptions;
 using FoodPlanner.Application.MediatR.Ingredient.Queries;
 using FoodPlanner.Application.MediatR.Meal.Queries;
+using FoodPlanner.Application.MediatR.Product.Queries;
+using FoodPlanner.Application.MediatR.Unit.Queries;
 using MediatR;
 using System;
 using System.Threading;
@@ -22,12 +24,14 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
             if (await _mediator.Send(new DoesMealExistByIdQuery(request.MealId)) == false)
                 throw new EntityNotFoundException(nameof(request.MealId));
 
-            /*TODO
-                Check if ingredient is in relationship with given meal
-                Check if product exists
-                Check if unit exists
-                For each check create Mediator query and handler
-             */
+            if (await _mediator.Send(new IsIngredientChildOfMealQuery(request.IngredientId, request.MealId)) == false)
+                throw new ArgumentException($"Ingredient with Id {request.IngredientId} is not a child of meal with Id {request.MealId}.");
+
+            if (await _mediator.Send(new DoesProductExistByIdQuery(request.ProductId)) == false)
+                throw new EntityNotFoundException(nameof(request.ProductId));
+
+            if (await _mediator.Send(new DoesUnitExistByIdQuery(request.UnitId)) == false)
+                throw new EntityNotFoundException(nameof(request.UnitId));
 
             return global::MediatR.Unit.Value;
         }

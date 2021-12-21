@@ -4,9 +4,6 @@ using FoodPlanner.Domain.UnitTests.Common;
 using FoodPlanner.Domain.UnitTests.Common.Meal;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace FoodPlanner.Domain.UnitTests.Tests

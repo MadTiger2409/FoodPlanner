@@ -3,7 +3,6 @@ using FoodPlanner.Application.Common.Interfaces;
 using FoodPlanner.Application.MediatR.Meal.Commands;
 using FoodPlanner.Application.MediatR.Meal.Queries;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 

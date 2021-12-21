@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FoodPlanner.Domain.Common
+﻿namespace FoodPlanner.Domain.Common
 {
     public abstract class BaseEntity
     {

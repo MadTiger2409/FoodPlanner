@@ -21,7 +21,7 @@ namespace FoodPlanner.Application.MediatR.Unit.Handlers
 
         public async Task<Domain.Entities.Unit> Handle(CreateUnitCommand request, CancellationToken cancellationToken)
         {
-            if (await _mediator.Send(new DoesUnitExistsByNameQuery(request.Name)))
+            if (await _mediator.Send(new DoesUnitExistByNameQuery(request.Name)))
                 throw new EntityAlreadyExistsException($"{request.Name}");
 
             var unit = new Domain.Entities.Unit { Name = request.Name };

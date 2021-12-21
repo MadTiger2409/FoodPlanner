@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FoodPlanner.WebApi.ActionParameters.Ingredient;
-using System.Collections.Generic;
 
 namespace FoodPlanner.WebApi.Validators.Ingredient
 {

@@ -2,6 +2,7 @@
 using FoodPlanner.Application.MediatR.Ingredient.Commands;
 using FoodPlanner.Application.MediatR.Ingredient.Queries;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,9 +24,16 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
         {
             await _mediator.Send(new CanUpdateIngredientQuery(request.UnitId, request.ProductId, request.MealId, request.IngredientId));
 
-            //TODO Update the ingredient
+            var ingredient = await _context.Ingredients.SingleOrDefaultAsync(x => x.Id == request.IngredientId);
 
-            throw new Exception();
+            ingredient.ProductId = request.ProductId;
+            ingredient.UnitId = request.UnitId;
+            ingredient.Amount = request.Amount;
+
+            _context.Ingredients.Update(ingredient);
+            await _context.SaveChangesAsync();
+
+            return ingredient;
         }
     }
 }

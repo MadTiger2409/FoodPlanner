@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FoodPlanner.Domain.Entities;
-using FoodPlanner.Domain.UnitTests.Common;
 using FoodPlanner.Domain.UnitTests.Common.Ingredient;
 using System;
 using Xunit;

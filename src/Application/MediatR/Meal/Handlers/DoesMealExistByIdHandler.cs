@@ -2,10 +2,6 @@
 using FoodPlanner.Application.MediatR.Meal.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,6 +14,6 @@ namespace FoodPlanner.Application.MediatR.Meal.Handlers
         public DoesMealExistByIdHandler(IApplicationDbContext context) => _context = context;
 
         public async Task<bool> Handle(DoesMealExistByIdQuery request, CancellationToken cancellationToken)
-            => await _context.Meals.AnyAsync(x => x.Id == request.id);
+            => await _context.Meals.AnyAsync(x => x.Id == request.Id);
     }
 }
