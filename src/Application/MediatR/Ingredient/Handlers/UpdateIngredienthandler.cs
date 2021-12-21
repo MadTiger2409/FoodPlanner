@@ -21,14 +21,9 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 
         public async Task<Domain.Entities.Ingredient> Handle(UpdateIngredientCommand request, CancellationToken cancellationToken)
         {
-            /*TODO
-                Check if ingredient exists
-                Check if ingredient is in relationship with given meal
-                Check if product exists
-                Check if unit exists
-                For each check create Mediator query and handler
-             */
             await _mediator.Send(new CanUpdateIngredientQuery(request.UnitId, request.ProductId, request.MealId, request.IngredientId));
+
+            //TODO Update the ingredient
 
             throw new Exception();
         }
