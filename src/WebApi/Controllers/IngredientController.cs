@@ -21,11 +21,7 @@ namespace FoodPlanner.WebApi.Controllers
         [HttpPut("{ingredientId}")]
         public async Task<IActionResult> UpdateIngredientAsync([FromBody] UpdateIngredient command, int id, int ingredientId)
         {
-            var mediatorCommand = (UpdateIngredientCommand)command;
-            mediatorCommand.MealId = id;
-            mediatorCommand.IngredientId = ingredientId;
-
-            var ingredient = await Mediator.Send(mediatorCommand);
+            var ingredient = await Mediator.Send(command.GetUpdateIngredientCommand(id, ingredientId));
 
             return Ok(ingredient);
         }

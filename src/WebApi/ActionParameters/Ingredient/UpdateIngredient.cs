@@ -8,13 +8,15 @@ namespace FoodPlanner.WebApi.ActionParameters.Ingredient
         public int UnitId { get; set; }
         public float Amount { get; set; }
 
-        public static implicit operator UpdateIngredientCommand(UpdateIngredient ingredient)
+        public UpdateIngredientCommand GetUpdateIngredientCommand(int mealId, int ingredientId)
         {
             return new UpdateIngredientCommand
             {
-                ProductId = ingredient.ProductId,
-                UnitId = ingredient.UnitId,
-                Amount = ingredient.Amount
+                ProductId = ProductId,
+                UnitId = UnitId,
+                Amount = Amount,
+                MealId = mealId,
+                IngredientId = ingredientId
             };
         }
     }
