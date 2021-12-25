@@ -5,35 +5,24 @@ namespace FoodPlanner.Domain.Entities
 {
     public class PlannedMeal : BaseEntity
     {
-        private int mealId;
-        private int ordinalNumber;
+        private uint ordinalNumber;
 
         public DateTime ScheduledFor { get; set; }
 
-        public int MealId
-        {
-            get => mealId;
-            set
-            {
-                if (value < 1)
-                    throw new ArgumentException("'MealId' must be positive.");
+        public int MealId { get; set; }
+        
+        public Meal Meal { get; set; }
 
-                mealId = value;
-            }
-        }
-
-        public int OrdinalNumber
+        public uint OrdinalNumber
         {
             get => ordinalNumber;
             set
             {
                 if (value < 1)
-                    throw new ArgumentException("'OrdinalNumber' must be positive.");
+                    throw new ArgumentException($"'{nameof(OrdinalNumber)}' must be positive.");
 
                 ordinalNumber = value;
             }
         }
-
-        public Meal Meal { get; set; }
     }
 }

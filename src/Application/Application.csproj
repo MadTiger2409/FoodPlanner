@@ -13,8 +13,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MediatR\PlannedMeal\Commands\" />
-  </ItemGroup>
 </Project>
