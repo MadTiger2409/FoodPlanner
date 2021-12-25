@@ -29,7 +29,7 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                     b.Property<float>("Amount")
                         .HasColumnType("real");
 
-                    b.Property<int?>("MealId")
+                    b.Property<int>("MealId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
@@ -74,8 +74,8 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                     b.Property<int>("MealId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrdinalNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("OrdinalNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ScheduledFor")
                         .HasColumnType("datetime2");
@@ -121,9 +121,11 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("FoodPlanner.Domain.Entities.Ingredient", b =>
                 {
-                    b.HasOne("FoodPlanner.Domain.Entities.Meal", null)
+                    b.HasOne("FoodPlanner.Domain.Entities.Meal", "Meal")
                         .WithMany("Ingredients")
-                        .HasForeignKey("MealId");
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FoodPlanner.Domain.Entities.Product", "Product")
                         .WithMany("Ingredients")
@@ -136,6 +138,8 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Meal");
 
                     b.Navigation("Product");
 

@@ -54,7 +54,7 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ScheduledFor = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MealId = table.Column<int>(type: "int", nullable: false),
-                    OrdinalNumber = table.Column<int>(type: "int", nullable: false)
+                    OrdinalNumber = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,7 +76,7 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                     Amount = table.Column<float>(type: "real", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false),
-                    MealId = table.Column<int>(type: "int", nullable: true)
+                    MealId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,7 +86,7 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                         column: x => x.MealId,
                         principalTable: "Meals",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ingredients_Products_ProductId",
                         column: x => x.ProductId,

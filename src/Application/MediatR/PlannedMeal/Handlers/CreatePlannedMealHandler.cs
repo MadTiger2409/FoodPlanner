@@ -25,6 +25,8 @@ namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
         public Task<Domain.Entities.PlannedMeal> Handle(CreatePlannedMealCommand request, CancellationToken cancellationToken)
         {
             _mediator.Send(new CanCreatePlannedMealQuery(request.MealId, request.OrdinalNumber, request.ScheduledFor));
+
+            throw new NotImplementedException();
         }
     }
 }
