@@ -22,11 +22,21 @@ namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
             _mediator = mediator;
         }
 
-        public Task<Domain.Entities.PlannedMeal> Handle(CreatePlannedMealCommand request, CancellationToken cancellationToken)
+        public async Task<Domain.Entities.PlannedMeal> Handle(CreatePlannedMealCommand request, CancellationToken cancellationToken)
         {
-            _mediator.Send(new CanCreatePlannedMealQuery(request.MealId, request.OrdinalNumber, request.ScheduledFor));
+            await _mediator.Send(new CanCreatePlannedMealQuery(request.MealId, request.OrdinalNumber, request.ScheduledFor));
 
-            throw new NotImplementedException();
+            var plannedMeal = new Domain.Entities.PlannedMeal
+            {
+                MealId = request.MealId,
+                OrdinalNumber = request.OrdinalNumber,
+                ScheduledFor = request.ScheduledFor
+            };
+
+            _context.PlannedMeals.Add(plannedMeal);
+            await _context.SaveChangesAsync();
+
+            return plannedMeal;
         }
     }
 }

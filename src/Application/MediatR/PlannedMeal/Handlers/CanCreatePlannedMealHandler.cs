@@ -25,10 +25,10 @@ namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
             if (request.ScheduledFor.Date < DateTime.UtcNow.Date)
                 throw new ArgumentException("Can't schedule meal for day from the past.");
 
-            //TODO Check other conditions
+            if (await _mediator.Send(new DoesPlannedMealExistByDateAndOrdinalNumberQuery(request.ScheduledFor, request.OrdinalNumber)))
+                throw new ArgumentException($"There is already meal with ordinal number {request.OrdinalNumber} planned for {request.ScheduledFor.Date}");
 
             return global::MediatR.Unit.Value;
-
         }
     }
 }
