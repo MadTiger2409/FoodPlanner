@@ -20,7 +20,26 @@ namespace FoodPlanner.Application.MediatR.ShoppingList.Handlers
 
         public async Task<List<ShoppingListModel>> Handle(GetShoppingListQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var shoppingList = _context.Ingredients
+                .Include(x => x.Product)
+                .Include(x => x.Unit)
+                .Include(x => x.Meal)
+                .ThenInclude(y => y.PlannedMeals.Where(z => z.ScheduledFor.Date >= request.From.Date && z.ScheduledFor.Date <= request.To.Date))
+                .GroupBy(b => new
+                {
+                    Product = b.Product.Name,
+                    Unit = b.Unit.Name,
+                    b.Id,
+                    b.UnitId,
+                })
+                .Select(sl => new ShoppingListModel
+                {
+                    Name = sl.Key.Product,
+                    Unit = sl.Key.Unit,
+                    Amount = sl.Sum(x => x.Amount)
+                }).ToList();
+
+            return shoppingList;
         }
     }
 }
