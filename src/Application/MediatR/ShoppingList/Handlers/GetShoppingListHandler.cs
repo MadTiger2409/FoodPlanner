@@ -20,7 +20,7 @@ namespace FoodPlanner.Application.MediatR.ShoppingList.Handlers
 
         public async Task<List<ShoppingListModel>> Handle(GetShoppingListQuery request, CancellationToken cancellationToken)
         {
-            var shoppingList = _context.Ingredients
+            var shoppingList = await _context.Ingredients
                 .Include(x => x.Product)
                 .Include(x => x.Unit)
                 .Include(x => x.Meal)
@@ -37,7 +37,7 @@ namespace FoodPlanner.Application.MediatR.ShoppingList.Handlers
                     Name = sl.Key.Product,
                     Unit = sl.Key.Unit,
                     Amount = sl.Sum(x => x.Amount)
-                }).ToList();
+                }).ToListAsync();
 
             return shoppingList;
         }
