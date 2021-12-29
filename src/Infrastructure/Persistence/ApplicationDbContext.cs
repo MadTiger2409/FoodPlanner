@@ -1,4 +1,5 @@
 ﻿using FoodPlanner.Application.Common.Interfaces;
+using FoodPlanner.Application.Common.ProjectionModels;
 using FoodPlanner.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -12,6 +13,7 @@ namespace FoodPlanner.Infrastructure.Persistence
         public DbSet<Product> Products { get; set; }
         public DbSet<Meal> Meals { get; set; }
         public DbSet<PlannedMeal> PlannedMeals { get; set; }
+        public DbSet<ShoppingListModel> ShoppingLists { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

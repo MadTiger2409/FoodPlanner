@@ -5,7 +5,7 @@ namespace FoodPlanner.Domain.Entities
 {
     public class PlannedMeal : BaseEntity
     {
-        private uint ordinalNumber;
+        private byte ordinalNumber;
 
         public DateTime ScheduledFor { get; set; }
 
@@ -13,7 +13,7 @@ namespace FoodPlanner.Domain.Entities
         
         public Meal Meal { get; set; }
 
-        public uint OrdinalNumber
+        public byte OrdinalNumber
         {
             get => ordinalNumber;
             set

@@ -3,5 +3,5 @@ using System;
 
 namespace FoodPlanner.Application.MediatR.PlannedMeal.Queries
 {
-    public record CanCreatePlannedMealQuery(int MealId, uint OrdinalNumber, DateTime ScheduledFor) : IRequest;
+    public record CanCreatePlannedMealQuery(int MealId, byte OrdinalNumber, DateTime ScheduledFor) : IRequest;
 }

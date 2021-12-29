@@ -19,6 +19,20 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("FoodPlanner.Application.Common.ProjectionModels.ShoppingListModel", b =>
+                {
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToView("shopping_list_view");
+                });
+
             modelBuilder.Entity("FoodPlanner.Domain.Entities.Ingredient", b =>
                 {
                     b.Property<int>("Id")
@@ -74,8 +88,8 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                     b.Property<int>("MealId")
                         .HasColumnType("int");
 
-                    b.Property<long>("OrdinalNumber")
-                        .HasColumnType("bigint");
+                    b.Property<byte>("OrdinalNumber")
+                        .HasColumnType("tinyint");
 
                     b.Property<DateTime>("ScheduledFor")
                         .HasColumnType("datetime2");

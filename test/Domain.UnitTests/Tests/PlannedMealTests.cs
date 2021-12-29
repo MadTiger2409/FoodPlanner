@@ -34,18 +34,18 @@ namespace FoodPlanner.Domain.UnitTests.Tests
             PlannedMeal plannedMeal = new();
 
             // Act
-            plannedMeal.OrdinalNumber = (uint)ordinalNumber;
+            plannedMeal.OrdinalNumber = (byte)ordinalNumber;
 
             // Assert
             plannedMeal.Should().NotBeNull();
-            plannedMeal.OrdinalNumber.Should().BePositive().And.Be((uint)ordinalNumber);
+            plannedMeal.OrdinalNumber.Should().BePositive().And.Be((byte)ordinalNumber);
         }
 
         [Fact]
         public void Failed_With_Setting_Not_Positive_OrdinalNumber()
         {
             // Arrange
-            uint ordinalNumber = 0;
+            byte ordinalNumber = 0;
             PlannedMeal plannedMeal = new();
 
             // Act

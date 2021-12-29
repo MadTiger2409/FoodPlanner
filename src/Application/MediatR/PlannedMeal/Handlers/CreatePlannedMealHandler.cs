@@ -30,7 +30,7 @@ namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
             {
                 MealId = request.MealId,
                 OrdinalNumber = request.OrdinalNumber,
-                ScheduledFor = request.ScheduledFor
+                ScheduledFor = request.ScheduledFor.Date
             };
 
             _context.PlannedMeals.Add(plannedMeal);

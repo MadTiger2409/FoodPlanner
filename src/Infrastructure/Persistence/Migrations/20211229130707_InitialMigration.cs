@@ -54,7 +54,7 @@ namespace FoodPlanner.Infrastructure.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ScheduledFor = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MealId = table.Column<int>(type: "int", nullable: false),
-                    OrdinalNumber = table.Column<long>(type: "bigint", nullable: false)
+                    OrdinalNumber = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
