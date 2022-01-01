@@ -1,8 +1,12 @@
-﻿using FoodPlanner.Application.Common.Interfaces;
+﻿using AutoMapper;
+using FoodPlanner.Application.Common.Exceptions;
+using FoodPlanner.Application.Common.Interfaces;
+using FoodPlanner.Application.Mappings.Dtos.Ingredient;
 using FoodPlanner.Application.MediatR.Ingredient.Commands;
 using FoodPlanner.Application.MediatR.Meal.Queries;
 using FoodPlanner.Domain.Comparers;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +15,29 @@ using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 {
-    public class CreateIngredientsHandler : IRequestHandler<CreateIngredientsCommand, List<Domain.Entities.Ingredient>>
+    public class CreateIngredientsHandler : IRequestHandler<CreateIngredientsCommand, List<IngredientDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly ISender _mediator;
+        private readonly IMapper _mapper;
 
-        public CreateIngredientsHandler(IApplicationDbContext context, ISender mediator)
+        public CreateIngredientsHandler(IApplicationDbContext context, ISender mediator, IMapper mapper)
         {
             _context = context;
             _mediator = mediator;
+            _mapper = mapper;
         }
 
-        public async Task<List<Domain.Entities.Ingredient>> Handle(CreateIngredientsCommand request, CancellationToken cancellationToken)
+        public async Task<List<IngredientDto>> Handle(CreateIngredientsCommand request, CancellationToken cancellationToken)
         {
-            var meal = await _mediator.Send(new GetMealByIdQuery(request.MealId));
+            var meal = await _context.Meals
+                .Include(x => x.Ingredients).ThenInclude(y => y.Product)
+                .Include(x => x.Ingredients).ThenInclude(y => y.Unit)
+                .SingleOrDefaultAsync(x => x.Id == request.MealId);
+
+            if (meal == null)
+                throw new EntityNotFoundException(nameof(request.MealId));
+
             var duplicates = meal.Ingredients.Intersect(request.Ingredients, new IngredientWithoutAmountComparer());
 
             if (duplicates.Any())
@@ -38,7 +51,7 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 
             await _context.SaveChangesAsync();
 
-            return request.Ingredients;
+            return _mapper.Map<List<IngredientDto>>(request.Ingredients);
         }
     }
 }

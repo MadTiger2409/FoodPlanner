@@ -1,6 +1,7 @@
-﻿using MediatR;
+﻿using FoodPlanner.Application.Mappings.Dtos.Product;
+using MediatR;
 
 namespace FoodPlanner.Application.MediatR.Product.Commands
 {
-    public record UpdateProductCommand(int Id, string Name) : IRequest<Domain.Entities.Product>;
+    public record UpdateProductCommand(int Id, string Name) : IRequest<ProductDto>;
 }

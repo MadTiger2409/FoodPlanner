@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using FoodPlanner.Application.Mappings.Dtos.Ingredient;
+using MediatR;
 
 namespace FoodPlanner.Application.MediatR.Ingredient.Commands
 {
-    public class UpdateIngredientCommand : IRequest<Domain.Entities.Ingredient>
+    public class UpdateIngredientCommand : IRequest<IngredientDto>
     {
         public int MealId { get; set; }
         public int IngredientId { get; set; }
