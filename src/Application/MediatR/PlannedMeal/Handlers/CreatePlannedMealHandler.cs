@@ -1,28 +1,28 @@
-﻿using FoodPlanner.Application.Common.Interfaces;
+﻿using AutoMapper;
+using FoodPlanner.Application.Common.Interfaces;
+using FoodPlanner.Application.Mappings.Dtos.PlannedMeal;
 using FoodPlanner.Application.MediatR.PlannedMeal.Commands;
 using FoodPlanner.Application.MediatR.PlannedMeal.Queries;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
 {
-    public class CreatePlannedMealHandler : IRequestHandler<CreatePlannedMealCommand, Domain.Entities.PlannedMeal>
+    public class CreatePlannedMealHandler : IRequestHandler<CreatePlannedMealCommand, PlannedMealDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly ISender _mediator;
+        private readonly IMapper _mapper;
 
-        public CreatePlannedMealHandler(IApplicationDbContext context, ISender mediator)
+        public CreatePlannedMealHandler(IApplicationDbContext context, ISender mediator, IMapper mapper)
         {
             _context = context;
             _mediator = mediator;
+            _mapper = mapper;
         }
 
-        public async Task<Domain.Entities.PlannedMeal> Handle(CreatePlannedMealCommand request, CancellationToken cancellationToken)
+        public async Task<PlannedMealDto> Handle(CreatePlannedMealCommand request, CancellationToken cancellationToken)
         {
             await _mediator.Send(new CanCreatePlannedMealQuery(request.MealId, request.OrdinalNumber, request.ScheduledFor));
 
@@ -36,7 +36,7 @@ namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
             _context.PlannedMeals.Add(plannedMeal);
             await _context.SaveChangesAsync();
 
-            return plannedMeal;
+            return _mapper.Map<PlannedMealDto>(plannedMeal);
         }
     }
 }

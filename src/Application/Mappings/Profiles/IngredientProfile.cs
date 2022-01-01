@@ -8,7 +8,7 @@ namespace FoodPlanner.Application.Mappings.Profiles
     {
         public IngredientProfile()
         {
-            CreateMap<Domain.Entities.Meal, ShortMealDto>();
+            CreateMap<Domain.Entities.Meal, MealShortDto>();
             CreateMap<Domain.Entities.Ingredient, IngredientDto>();
         }
     }

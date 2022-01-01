@@ -6,7 +6,6 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace FoodPlanner.Application.MediatR.ShoppingList.Handlers
 {

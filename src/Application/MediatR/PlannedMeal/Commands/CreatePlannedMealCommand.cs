@@ -1,11 +1,8 @@
-﻿using MediatR;
+﻿using FoodPlanner.Application.Mappings.Dtos.PlannedMeal;
+using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.PlannedMeal.Commands
 {
-    public record CreatePlannedMealCommand(byte OrdinalNumber, DateTime ScheduledFor, int MealId) : IRequest<Domain.Entities.PlannedMeal>;
+    public record CreatePlannedMealCommand(byte OrdinalNumber, DateTime ScheduledFor, int MealId) : IRequest<PlannedMealDto>;
 }

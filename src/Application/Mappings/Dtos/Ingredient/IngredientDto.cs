@@ -8,6 +8,6 @@ namespace FoodPlanner.Application.Mappings.Dtos.Ingredient
         public float Amount { get; set; }
         public int UnitId { get; set; }
         public int ProductId { get; set; }
-        public ShortMealDto Meal { get; set; }
+        public MealShortDto Meal { get; set; }
     }
 }

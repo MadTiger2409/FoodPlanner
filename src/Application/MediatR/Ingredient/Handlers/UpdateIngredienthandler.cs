@@ -5,7 +5,6 @@ using FoodPlanner.Application.MediatR.Ingredient.Commands;
 using FoodPlanner.Application.MediatR.Ingredient.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 

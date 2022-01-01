@@ -1,11 +1,7 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FoodPlanner.Application.Mappings.Dtos.PlannedMeal;
+using MediatR;
 
 namespace FoodPlanner.Application.MediatR.PlannedMeal.Queries
 {
-    public record GetPlannedMealByIdQuery(int Id) : IRequest<Domain.Entities.PlannedMeal>;
+    public record GetPlannedMealByIdQuery(int Id) : IRequest<PlannedMealDto>;
 }
