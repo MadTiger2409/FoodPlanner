@@ -1,6 +1,7 @@
-﻿using MediatR;
+﻿using FoodPlanner.Application.Mappings.Dtos.Unit;
+using MediatR;
 
 namespace FoodPlanner.Application.MediatR.Unit.Commands
 {
-    public record CreateUnitCommand(string Name) : IRequest<Domain.Entities.Unit>;
+    public record CreateUnitCommand(string Name) : IRequest<UnitDto>;
 }

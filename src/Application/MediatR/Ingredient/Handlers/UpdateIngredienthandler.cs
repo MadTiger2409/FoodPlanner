@@ -1,4 +1,6 @@
-﻿using FoodPlanner.Application.Common.Interfaces;
+﻿using AutoMapper;
+using FoodPlanner.Application.Common.Interfaces;
+using FoodPlanner.Application.Mappings.Dtos.Ingredient;
 using FoodPlanner.Application.MediatR.Ingredient.Commands;
 using FoodPlanner.Application.MediatR.Ingredient.Queries;
 using MediatR;
@@ -9,18 +11,20 @@ using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 {
-    public class UpdateIngredientHandler : IRequestHandler<UpdateIngredientCommand, Domain.Entities.Ingredient>
+    public class UpdateIngredientHandler : IRequestHandler<UpdateIngredientCommand, IngredientDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly ISender _mediator;
+        private readonly IMapper _mapper;
 
-        public UpdateIngredientHandler(IApplicationDbContext context, ISender mediator)
+        public UpdateIngredientHandler(IApplicationDbContext context, ISender mediator, IMapper mapper)
         {
             _context = context;
             _mediator = mediator;
+            _mapper = mapper;
         }
 
-        public async Task<Domain.Entities.Ingredient> Handle(UpdateIngredientCommand request, CancellationToken cancellationToken)
+        public async Task<IngredientDto> Handle(UpdateIngredientCommand request, CancellationToken cancellationToken)
         {
             await _mediator.Send(new CanUpdateIngredientQuery(request.UnitId, request.ProductId, request.MealId, request.IngredientId));
 
@@ -33,7 +37,7 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
             _context.Ingredients.Update(ingredient);
             await _context.SaveChangesAsync();
 
-            return ingredient;
+            return _mapper.Map<IngredientDto>(ingredient);
         }
     }
 }
