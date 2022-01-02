@@ -2,7 +2,7 @@
 
 namespace FoodPlanner.WebApi.ActionParameters.Ingredient
 {
-    public class UpdateIngredient
+    public record UpdateIngredient
     {
         public int ProductId { get; set; }
         public int UnitId { get; set; }
@@ -10,7 +10,7 @@ namespace FoodPlanner.WebApi.ActionParameters.Ingredient
 
         public UpdateIngredientCommand GetUpdateIngredientCommand(int mealId, int ingredientId)
         {
-            return new UpdateIngredientCommand
+            return new()
             {
                 ProductId = ProductId,
                 UnitId = UnitId,

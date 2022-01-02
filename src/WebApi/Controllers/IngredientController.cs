@@ -1,5 +1,6 @@
 ﻿using FoodPlanner.Application.MediatR.Ingredient.Commands;
 using FoodPlanner.WebApi.ActionParameters.Ingredient;
+using FoodPlanner.WebApi.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FoodPlanner.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateIngredientsAsync([FromBody] List<CreateIngredient> command, int id)
         {
-            var ingredients = await Mediator.Send(new CreateIngredientsCommand(id, command.Select(a => (Domain.Entities.Ingredient)a).ToList()));
+            var ingredients = await Mediator.Send(command.GetCreateIngredientsCommand(id));
 
             return Created($"{Request.Host}{Request.Path}/", ingredients);
         }

@@ -12,7 +12,7 @@ namespace FoodPlanner.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProductAsync([FromBody] CreateProduct command)
         {
-            var product = await Mediator.Send(new CreateProductCommand(command.Name));
+            var product = await Mediator.Send(command.GetCreateProductCommand());
 
             return Created($"{Request.Host}{Request.Path}/{product.Id}", product);
         }
@@ -20,7 +20,7 @@ namespace FoodPlanner.WebApi.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProduct command, int id)
         {
-            var product = await Mediator.Send(new UpdateProductCommand(id, command.Name));
+            var product = await Mediator.Send(command.GetUpdateProductCommand(id));
 
             return Ok(product);
         }
