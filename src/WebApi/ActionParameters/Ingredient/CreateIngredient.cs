@@ -1,28 +1,18 @@
 ﻿namespace FoodPlanner.WebApi.ActionParameters.Ingredient
 {
-    public class CreateIngredient
+    public record CreateIngredient
     {
         public int ProductId { get; set; }
         public int UnitId { get; set; }
         public float Amount { get; set; }
 
-        public static implicit operator Domain.Entities.Ingredient(CreateIngredient createIngredient)
+        public Domain.Entities.Ingredient GetIngredient()
         {
-            return new Domain.Entities.Ingredient
+            return new()
             {
-                ProductId = createIngredient.ProductId,
-                UnitId = createIngredient.UnitId,
-                Amount = createIngredient.Amount
-            };
-        }
-
-        public static implicit operator CreateIngredient(Domain.Entities.Ingredient ingredient)
-        {
-            return new CreateIngredient
-            {
-                ProductId = ingredient.ProductId,
-                UnitId = ingredient.UnitId,
-                Amount = ingredient.Amount
+                ProductId = ProductId,
+                UnitId = UnitId,
+                Amount = Amount
             };
         }
     }

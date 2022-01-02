@@ -3,13 +3,13 @@ using System;
 
 namespace FoodPlanner.WebApi.ActionParameters.PlannedMeal
 {
-    public class CreatePlannedMeal
+    public record CreatePlannedMeal
     {
         public byte OrdinalNumber { get; set; }
         public DateTime ScheduledFor { get; set; }
         public int MealId { get; set; }
 
         public CreatePlannedMealCommand GetCreatePlannedMealCommand()
-            => new (OrdinalNumber, ScheduledFor, MealId);
+            => new(OrdinalNumber, ScheduledFor, MealId);
     }
 }
