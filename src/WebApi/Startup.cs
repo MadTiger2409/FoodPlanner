@@ -50,6 +50,8 @@ namespace FoodPlanner.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense((string)Configuration.GetValue(typeof(string), "SyncfusionLicence"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
