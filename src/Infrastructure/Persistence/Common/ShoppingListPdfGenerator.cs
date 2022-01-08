@@ -1,6 +1,7 @@
 ﻿using FoodPlanner.Application.Common.ProjectionModels;
 using FoodPlanner.Infrastructure.Persistence.Common.Interfaces;
 using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Grid;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,14 @@ namespace FoodPlanner.Infrastructure.Persistence.Common
 
             var grid = new PdfGrid
             {
-                DataSource = shoppingList
+                DataSource = shoppingList,
+                Style = new PdfGridStyle
+                {
+                    CellPadding = new PdfPaddings(10, 0, 4, 0),
+                }
             };
 
-            grid.Draw(page, new Syncfusion.Drawing.PointF(10, 10));
+            grid.Draw(page, new Syncfusion.Drawing.PointF(10, 5));
 
             var stream = new MemoryStream();
             document.Save(stream);

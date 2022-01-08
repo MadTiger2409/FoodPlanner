@@ -30,7 +30,7 @@ namespace FoodPlanner.Application.MediatR.ShoppingList.Handlers
                 {
                     Name = y.Key.Name,
                     Unit = y.Key.Unit,
-                    Amount = Math.Round(y.Sum(s => s.Amount), 2)
+                    Amount = Math.Round(y.Sum(s => s.Amount) * request.PeopleCount, 2)
                 })
                 .OrderBy(x => x.Name)
                 .ToList();

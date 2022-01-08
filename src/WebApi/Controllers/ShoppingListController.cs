@@ -17,17 +17,23 @@ namespace FoodPlanner.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetShoppingListAsync(DateTime from, DateTime to)
+        public async Task<IActionResult> GetShoppingListAsync(DateTime from, DateTime to, float peopleCount)
         {
-            var shoppingList = await Mediator.Send(new GetShoppingListQuery(from, to));
+            if (peopleCount == 0f)
+                peopleCount = 1f;
+
+            var shoppingList = await Mediator.Send(new GetShoppingListQuery(from, to, peopleCount));
 
             return Ok(shoppingList);
         }
 
         [HttpGet("pdf")]
-        public async Task<IActionResult> GetShoppingListAsPdf(DateTime from, DateTime to)
+        public async Task<IActionResult> GetShoppingListAsPdf(DateTime from, DateTime to, float peopleCount)
         {
-            var shoppingList = await Mediator.Send(new GetShoppingListQuery(from, to));
+            if (peopleCount == 0f)
+                peopleCount = 1f;
+
+            var shoppingList = await Mediator.Send(new GetShoppingListQuery(from, to, peopleCount));
             var pdf = _pdfGenerator.GetPdf(shoppingList);
 
             return File(pdf.Content, pdf.Type, pdf.Name);
