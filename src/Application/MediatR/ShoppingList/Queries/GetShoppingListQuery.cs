@@ -5,5 +5,5 @@ using System.Collections.Generic;
 
 namespace FoodPlanner.Application.MediatR.ShoppingList.Queries
 {
-    public record GetShoppingListQuery(DateTime From, DateTime To) : IRequest<List<ShoppingListModel>>;
+    public record GetShoppingListQuery(DateTime From, DateTime To, float PeopleCount) : IRequest<List<ShoppingListModel>>;
 }
