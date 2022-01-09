@@ -4,7 +4,13 @@ namespace FoodPlanner.WebApi.ActionParameters.Product
 {
     public record CreateProduct
     {
-        public string Name { get; set; }
+        private string name;
+
+        public string Name
+        {
+            get => name;
+            set => name = value.Trim().ToLowerInvariant();
+        }
 
         public CreateProductCommand GetCreateProductCommand() => new(Name);
     }

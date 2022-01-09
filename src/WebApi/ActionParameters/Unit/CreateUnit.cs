@@ -4,7 +4,13 @@ namespace FoodPlanner.WebApi.ActionParameters.Unit
 {
     public record CreateUnit
     {
-        public string Name { get; set; }
+        private string name;
+
+        public string Name
+        {
+            get => name;
+            set => name = value.Trim().ToLowerInvariant();
+        }
 
         public CreateUnitCommand GetCreateUnitCommand() => new(Name);
     };

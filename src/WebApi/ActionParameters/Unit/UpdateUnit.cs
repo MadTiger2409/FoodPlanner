@@ -4,7 +4,13 @@ namespace FoodPlanner.WebApi.ActionParameters.Unit
 {
     public record UpdateUnit
     {
-        public string Name { get; set; }
+        private string name;
+
+        public string Name
+        {
+            get => name;
+            set => name = value.Trim().ToLowerInvariant();
+        }
 
         public UpdateUnitCommand GetUpdateUnitCommand(int id) => new(id, Name);
     }
