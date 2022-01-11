@@ -1,9 +1,9 @@
 ﻿using FoodPlanner.Application.Common.ProjectionModels;
 using FoodPlanner.Infrastructure.Persistence.Common.Interfaces;
+using Syncfusion.Drawing;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
-using Syncfusion.Pdf.Grid;
-using System;
+using Syncfusion.Pdf.Tables;
 using System.Collections.Generic;
 using System.IO;
 
@@ -16,16 +16,25 @@ namespace FoodPlanner.Infrastructure.Persistence.Common
             var document = new PdfDocument();
             var page = document.Pages.Add();
 
-            var grid = new PdfGrid
+            PdfCellStyle headerStyle = new()
             {
-                DataSource = shoppingList,
-                Style = new PdfGridStyle
-                {
-                    CellPadding = new PdfPaddings(10, 0, 4, 0),
-                }
+                TextPen = PdfPens.Black,
+                TextBrush = PdfBrushes.Black,
+                BackgroundBrush = PdfBrushes.White,
+                Font = new PdfStandardFont(PdfFontFamily.TimesRoman, 10),
             };
 
-            grid.Draw(page, new Syncfusion.Drawing.PointF(10, 5));
+            PdfLightTable table = new()
+            {
+                DataSource = shoppingList,
+                ColumnProportionalSizing = true,
+            };
+
+            table.Style.HeaderStyle = headerStyle;
+            table.Style.ShowHeader = true;
+            table.Style.CellPadding = 3f;
+
+            table.Draw(page, new PointF(10, 10));
 
             var stream = new MemoryStream();
             document.Save(stream);
