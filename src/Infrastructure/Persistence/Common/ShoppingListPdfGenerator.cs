@@ -16,13 +16,13 @@ namespace FoodPlanner.Infrastructure.Persistence.Common
             var document = new PdfDocument();
             var page = document.Pages.Add();
 
-            PdfCellStyle headerStyle = new()
-            {
-                TextPen = PdfPens.Black,
-                TextBrush = PdfBrushes.Black,
-                BackgroundBrush = PdfBrushes.White,
-                Font = new PdfStandardFont(PdfFontFamily.TimesRoman, 10),
-            };
+            MemoryStream fontStream = new(Properties.Resources.Arial);
+
+            PdfTrueTypeFont altFont = new(fontStream, 10);
+            PdfTrueTypeFont headerFont = new(fontStream, 12, PdfFontStyle.Bold);
+
+            PdfCellStyle altStyle = new(altFont, PdfBrushes.Black, PdfPens.Black);
+            PdfCellStyle headerStyle = new(headerFont, PdfBrushes.Black, PdfPens.Black);
 
             PdfLightTable table = new()
             {
@@ -30,8 +30,11 @@ namespace FoodPlanner.Infrastructure.Persistence.Common
                 ColumnProportionalSizing = true,
             };
 
+            table.Style.DefaultStyle = altStyle;
             table.Style.HeaderStyle = headerStyle;
+
             table.Style.ShowHeader = true;
+            table.Style.RepeatHeader = false;
             table.Style.CellPadding = 3f;
 
             table.Draw(page, new PointF(10, 10));
