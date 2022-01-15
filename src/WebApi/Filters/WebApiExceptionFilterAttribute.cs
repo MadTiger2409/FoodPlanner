@@ -38,7 +38,7 @@ namespace FoodPlanner.WebApi.Filters
                 return;
             }
 
-            //HandleUnknownException(context);
+           HandleUnknownException(context);
         }
 
         private void HandleEntityAlreadyExistsException(ExceptionContext context)
