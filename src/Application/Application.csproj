@@ -15,4 +15,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MediatR\Category\Commands\" />
+    <Folder Include="MediatR\Category\Handlers\" />
+  </ItemGroup>
 </Project>
