@@ -15,6 +15,7 @@ namespace FoodPlanner.Application.Common.Interfaces
         DbSet<Meal> Meals { get; set; }
         DbSet<PlannedMeal> PlannedMeals { get; set; }
         DbSet<ShoppingListModel> ShoppingLists { get; set; }
+        DbSet<Category> Categories { get; set; }
         DatabaseFacade Database { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
