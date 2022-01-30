@@ -3,5 +3,5 @@ using MediatR;
 
 namespace FoodPlanner.Application.MediatR.Product.Commands
 {
-    public record CreateProductCommand(string Name) : IRequest<ProductDto>;
+    public record CreateProductCommand(int CategoryId, string Name) : IRequest<ProductDto>;
 }

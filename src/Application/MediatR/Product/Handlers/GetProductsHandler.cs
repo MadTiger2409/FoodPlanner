@@ -22,6 +22,6 @@ namespace FoodPlanner.Application.MediatR.Product.Handlers
         }
 
         public async Task<List<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
-            => _mapper.Map<List<ProductDto>>(await _context.Products.ToListAsync());
+            => _mapper.Map<List<ProductDto>>(await _context.Products.Include(x => x.Category).ToListAsync());
     }
 }

@@ -2,6 +2,7 @@
 using FoodPlanner.Application.Common.Exceptions;
 using FoodPlanner.Application.Common.Interfaces;
 using FoodPlanner.Application.Mappings.Dtos.Product;
+using FoodPlanner.Application.MediatR.Category.Queries;
 using FoodPlanner.Application.MediatR.Product.Commands;
 using FoodPlanner.Application.MediatR.Product.Queries;
 using MediatR;
@@ -28,7 +29,10 @@ namespace FoodPlanner.Application.MediatR.Product.Handlers
             if (await _mediator.Send(new DoesProductExistByNameQuery(request.Name)))
                 throw new EntityAlreadyExistsException($"{request.Name}");
 
-            var product = new Domain.Entities.Product { Name = request.Name };
+            if (await _mediator.Send(new DoesCategoryExistByIdQuery(request.CategoryId)) == false)
+                throw new EntityNotFoundException(nameof(request.CategoryId));
+
+            var product = new Domain.Entities.Product { Name = request.Name, CategoryId = request.CategoryId };
             _context.Products.Add(product);
 
             await _context.SaveChangesAsync(cancellationToken);
