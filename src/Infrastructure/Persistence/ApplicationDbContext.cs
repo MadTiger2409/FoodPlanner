@@ -14,6 +14,7 @@ namespace FoodPlanner.Infrastructure.Persistence
         public DbSet<Meal> Meals { get; set; }
         public DbSet<PlannedMeal> PlannedMeals { get; set; }
         public DbSet<ShoppingListModel> ShoppingLists { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

@@ -23,6 +23,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
             product.Should().NotBeNull();
             product.Id.Should().Be(default);
             product.Name.Should().Be(default);
+            product.CategoryId.Should().Be(null);
             product.Ingredients.Should().NotBeNull();
         }
 

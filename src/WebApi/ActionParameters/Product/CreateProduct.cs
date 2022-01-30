@@ -12,6 +12,8 @@ namespace FoodPlanner.WebApi.ActionParameters.Product
             set => name = value.Trim().ToLowerInvariant();
         }
 
-        public CreateProductCommand GetCreateProductCommand() => new(Name);
+        public int CategoryId { get; set; }
+
+        public CreateProductCommand GetCreateProductCommand() => new(CategoryId, Name);
     }
 }

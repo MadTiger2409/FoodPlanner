@@ -1,5 +1,4 @@
-﻿using FoodPlanner.Application.MediatR.Product.Commands;
-using FoodPlanner.Application.MediatR.Product.Queries;
+﻿using FoodPlanner.Application.MediatR.Product.Queries;
 using FoodPlanner.WebApi.ActionParameters.Product;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
