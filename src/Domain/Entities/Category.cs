@@ -5,6 +5,6 @@ namespace FoodPlanner.Domain.Entities
 {
     public class Category : NamedEntity
     {
-        public List<Product> Products { get; set; }
+        public List<Product> Products { get; set; } = new();
     }
 }
