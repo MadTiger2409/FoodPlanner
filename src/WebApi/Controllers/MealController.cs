@@ -1,7 +1,9 @@
-﻿using FoodPlanner.Application.MediatR.Meal.Commands;
+﻿using FoodPlanner.Application.Mappings.Dtos.Meal;
+using FoodPlanner.Application.MediatR.Meal.Commands;
 using FoodPlanner.Application.MediatR.Meal.Queries;
 using FoodPlanner.WebApi.ActionParameters.Meal;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
@@ -34,9 +36,9 @@ namespace FoodPlanner.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMealsAsync()
+        public async Task<IActionResult> GetMealsAsync([FromQuery] string name)
         {
-            var meals = await Mediator.Send(new GetMealsQuery());
+            var meals = await Mediator.Send(new GetMealsQuery(name));
 
             return Ok(meals);
         }
