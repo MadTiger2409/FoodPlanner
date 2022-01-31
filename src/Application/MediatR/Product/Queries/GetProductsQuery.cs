@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 namespace FoodPlanner.Application.MediatR.Product.Queries
 {
-    public record GetProductsQuery() : IRequest<List<ProductDto>>;
+    public record GetProductsQuery(string Name = default) : IRequest<List<ProductDto>>;
 }

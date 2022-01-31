@@ -5,6 +5,7 @@ using FoodPlanner.Application.MediatR.Product.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,6 +23,13 @@ namespace FoodPlanner.Application.MediatR.Product.Handlers
         }
 
         public async Task<List<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
-            => _mapper.Map<List<ProductDto>>(await _context.Products.Include(x => x.Category).ToListAsync());
+        {
+            IQueryable<Domain.Entities.Product> query = _context.Products;
+
+            if (!string.IsNullOrWhiteSpace(request.Name))
+                query = query.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
+
+            return _mapper.Map<List<ProductDto>>(await query.Include(x => x.Category).ToListAsync());
+        }
     }
 }

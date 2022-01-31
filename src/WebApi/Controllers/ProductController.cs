@@ -33,9 +33,9 @@ namespace FoodPlanner.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync()
+        public async Task<IActionResult> GetProductsAsync([FromQuery] string name)
         {
-            var products = await Mediator.Send(new GetProductsQuery());
+            var products = await Mediator.Send(new GetProductsQuery(name));
 
             return Ok(products);
         }

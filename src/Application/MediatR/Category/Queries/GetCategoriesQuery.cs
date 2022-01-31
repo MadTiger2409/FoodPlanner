@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 namespace FoodPlanner.Application.MediatR.Category.Queries
 {
-    public record GetCategoriesQuery() : IRequest<List<CategoryDto>>;
+    public record GetCategoriesQuery(string Name = default) : IRequest<List<CategoryDto>>;
 }
