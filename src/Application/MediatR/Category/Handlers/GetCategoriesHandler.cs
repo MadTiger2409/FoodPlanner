@@ -5,6 +5,7 @@ using FoodPlanner.Application.MediatR.Category.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,6 +23,13 @@ namespace FoodPlanner.Application.MediatR.Category.Handlers
         }
 
         public async Task<List<CategoryDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
-            => _mapper.Map<List<CategoryDto>>(await _context.Categories.ToListAsync());
+        {
+            IQueryable<Domain.Entities.Category> query = _context.Categories;
+
+            if (!string.IsNullOrWhiteSpace(request.Name))
+                query = query.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
+
+            return _mapper.Map<List<CategoryDto>>(await query.ToListAsync());
+        }
     }
 }
