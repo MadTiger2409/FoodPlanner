@@ -1,4 +1,5 @@
 ﻿using FoodPlanner.Application.Common.Exceptions;
+using FoodPlanner.WebApi.Filters.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -38,7 +39,7 @@ namespace FoodPlanner.WebApi.Filters
                 return;
             }
 
-           HandleUnknownException(context);
+            HandleUnknownException(context);
         }
 
         private void HandleEntityAlreadyExistsException(ExceptionContext context)

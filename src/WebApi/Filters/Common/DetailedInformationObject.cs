@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FoodPlanner.WebApi.Filters
+namespace FoodPlanner.WebApi.Filters.Common
 {
     public class DetailedInformationObject
     {

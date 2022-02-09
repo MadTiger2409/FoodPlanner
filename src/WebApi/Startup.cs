@@ -32,6 +32,7 @@ namespace FoodPlanner.WebApi
             {
                 options.Filters.Add<WebApiExceptionFilterAttribute>();
                 options.Filters.Add<ModelStateValidationFilterAttribute>();
+                options.Filters.Add<WrapResponseFilter>();
             })
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
