@@ -9,9 +9,9 @@ namespace FoodPlanner.WebApi.Controllers
     public class PlannedMealController : ApiControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetPlannedMealsAsync()
+        public async Task<IActionResult> GetPlannedMealsAsync([FromQuery] GetPlannedMeals command)
         {
-            var plannedMeals = await Mediator.Send(new GetPlannedMealsQuery());
+            var plannedMeals = await Mediator.Send(command.GetGetPlannedMealsQuery());
 
             return Ok(plannedMeals);
         }
