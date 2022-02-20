@@ -15,6 +15,7 @@ namespace FoodPlanner.Application.Mappings.Profiles
             CreateMap<Domain.Entities.Unit, UnitDto>();
             CreateMap<Domain.Entities.Ingredient, IngredientForMealDto>();
             CreateMap<Domain.Entities.Meal, MealDto>();
+            CreateMap<Domain.Entities.PlannedMeal, PlannedMealForGroupingDto>();
             CreateMap<Domain.Entities.PlannedMeal, PlannedMealDto>();
         }
     }
