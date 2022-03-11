@@ -30,10 +30,10 @@ namespace FoodPlanner.WebApi
 
             services.AddCors(options =>
             {
-                options.AddPolicy(name: "localhostPolicy",
+                options.AddPolicy(name: "clientPolicy",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:5020").AllowAnyHeader().AllowAnyMethod();
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
 
@@ -71,7 +71,7 @@ namespace FoodPlanner.WebApi
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors("localhostPolicy");
+            app.UseCors("clientPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
