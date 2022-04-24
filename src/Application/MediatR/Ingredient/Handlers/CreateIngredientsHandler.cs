@@ -18,13 +18,11 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
     public class CreateIngredientsHandler : IRequestHandler<CreateIngredientsCommand, List<IngredientDto>>
     {
         private readonly IApplicationDbContext _context;
-        private readonly ISender _mediator;
         private readonly IMapper _mapper;
 
         public CreateIngredientsHandler(IApplicationDbContext context, ISender mediator, IMapper mapper)
         {
             _context = context;
-            _mediator = mediator;
             _mapper = mapper;
         }
 
