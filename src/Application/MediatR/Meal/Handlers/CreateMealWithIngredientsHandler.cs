@@ -31,9 +31,6 @@ namespace FoodPlanner.Application.MediatR.Meal.Handlers
 
             var meal = new Domain.Entities.Meal { Name = request.Name };
 
-            if (request.Ingredients.Count > 50)
-                throw new ArgumentException($"Ingredients list is too long. Meal can't have more than 50 ingredients in total.");
-
             meal.Ingredients.AddRange(request.Ingredients);
             _context.Meals.Add(meal);
 
