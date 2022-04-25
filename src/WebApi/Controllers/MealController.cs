@@ -12,9 +12,9 @@ namespace FoodPlanner.WebApi.Controllers
     public class MealController : ApiControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> CreateMealAsync([FromBody] CreateMeal command)
+        public async Task<IActionResult> CreateMealAsync([FromBody] CreateMealWithIngredients command)
         {
-            var meal = await Mediator.Send(command.GetCreateMealCommand());
+            var meal = await Mediator.Send(command.GetCreateMealWithIngredientsCommand());
 
             return Created($"{Request.Host}{Request.Path}/{meal.Id}", meal);
         }
