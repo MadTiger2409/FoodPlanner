@@ -28,15 +28,15 @@ stages:
         projects: '**/Domain.csproj'
         
     - task: DotNetCoreCLI@2
-      displayName: 'Restore packages for Domain unit tests'
+      displayName: 'Restore packages for Domain tests'
       inputs:
         command: 'restore'
-        projects: '**/Domain.UnitTests.csproj'
+        projects: '**/Domain.Tests.csproj'
         feedsToUse: 'select'
         
     - task: DotNetCoreCLI@2
-      displayName: 'Run Domain unit tests'
+      displayName: 'Run Domain tests'
       inputs:
         command: 'test'
-        projects: '**/Domain.UnitTests.csproj'
+        projects: '**/Domain.Tests.csproj'
         feedsToUse: 'select'
