@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.TestData.Ingredient
+namespace FoodPlanner.Domain.Tests.TestData.Ingredient
 {
     public class IncorrectAmountDataAttribute : DataAttribute
     {

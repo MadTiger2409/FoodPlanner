@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.TestData.PlannedMeal
+namespace FoodPlanner.Domain.Tests.TestData.PlannedMeal
 {
     public class CorrectScheduledForDateAttribute : DataAttribute
     {

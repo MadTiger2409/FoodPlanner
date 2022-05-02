@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.TestData.Common
+namespace FoodPlanner.Domain.Tests.TestData.Common
 {
     public class PlannedMealsMinimumDataAttribute : DataAttribute
     {

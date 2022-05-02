@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.TestData.Meal
+namespace FoodPlanner.Domain.Tests.TestData.Meal
 {
     public class CorrectMealNameAttribute : DataAttribute
     {

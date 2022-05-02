@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.TestData.Category
+namespace FoodPlanner.Domain.Tests.TestData.Category
 {
     public class CorrectCategoryNameAttribute : DataAttribute
     {

@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.TestData.Common
+namespace FoodPlanner.Domain.Tests.TestData.Common
 {
     class ProductsMinimumDataAttribute : DataAttribute
     {

@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using FoodPlanner.Domain.Entities;
-using FoodPlanner.Domain.UnitTests.TestData.Common;
-using FoodPlanner.Domain.UnitTests.TestData.PlannedMeal;
+using FoodPlanner.Domain.Tests.TestData.Common;
+using FoodPlanner.Domain.Tests.TestData.PlannedMeal;
 using System;
 using Xunit;
 
-namespace FoodPlanner.Domain.UnitTests.Tests
+namespace FoodPlanner.Domain.Tests.UnitTests
 {
     public class PlannedMealTests
     {
