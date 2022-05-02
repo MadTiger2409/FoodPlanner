@@ -2,9 +2,9 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.Common.Ingredient
+namespace FoodPlanner.Domain.UnitTests.TestData.Ingredient
 {
-    public class InCorrectAmountDataAttribute : DataAttribute
+    public class IncorrectAmountDataAttribute : DataAttribute
     {
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {

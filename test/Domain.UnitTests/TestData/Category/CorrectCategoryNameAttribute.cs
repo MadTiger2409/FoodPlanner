@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace FoodPlanner.Domain.UnitTests.Common.Category
+namespace FoodPlanner.Domain.UnitTests.TestData.Category
 {
     public class CorrectCategoryNameAttribute : DataAttribute
     {

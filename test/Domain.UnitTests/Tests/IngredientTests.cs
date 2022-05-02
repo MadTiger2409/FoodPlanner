@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using FoodPlanner.Domain.Entities;
-using FoodPlanner.Domain.UnitTests.Common.Ingredient;
+using FoodPlanner.Domain.UnitTests.TestData.Ingredient;
 using System;
 using Xunit;
 
@@ -41,7 +41,7 @@ namespace FoodPlanner.Domain.UnitTests.Tests
         }
 
         [Theory]
-        [InCorrectAmountData]
+        [IncorrectAmountData]
         public void Failed_With_Setting_Incorrect_Amount_Values(float amount)
         {
             // Arrange

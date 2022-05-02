@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using FoodPlanner.Domain.Entities;
-using FoodPlanner.Domain.UnitTests.Common;
-using FoodPlanner.Domain.UnitTests.Common.Meal;
+using FoodPlanner.Domain.UnitTests.TestData.Common;
+using FoodPlanner.Domain.UnitTests.TestData.Meal;
 using System;
 using System.Collections.Generic;
 using Xunit;
