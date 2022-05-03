@@ -8,6 +8,7 @@ using Xunit;
 
 namespace FoodPlanner.Domain.Tests.UnitTests
 {
+    [Trait("Unit tests", "Entities")]
     public class ProductTests
     {
         [Fact]

@@ -9,7 +9,7 @@ namespace FoodPlanner.WebApi.ActionParameters.Unit
         public string Name
         {
             get => name;
-            set => name = value.Trim().ToLowerInvariant();
+            set => name = value?.Trim().ToLowerInvariant();
         }
 
         public UpdateUnitCommand GetUpdateUnitCommand(int id) => new(id, Name);

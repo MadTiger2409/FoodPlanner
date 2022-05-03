@@ -7,7 +7,14 @@ namespace FoodPlanner.WebApi.ActionParameters.Meal
 {
     public record CreateMealWithIngredients
     {
-        public string Name { get; set; }
+        private string name;
+
+        public string Name
+        {
+            get => name;
+            set => name = value?.Trim().ToLowerInvariant();
+        }
+
         public List<CreateIngredient> Ingredients { get; set; }
 
         public CreateMealWithIngredientsCommand GetCreateMealWithIngredientsCommand()

@@ -9,7 +9,7 @@ namespace FoodPlanner.WebApi.ActionParameters.Meal
         public string Name
         {
             get => name;
-            set => name = value.Trim().ToLowerInvariant();
+            set => name = value?.Trim().ToLowerInvariant();
         }
 
         public UpdateMealCommand GetUpdateMealCommand(int id) => new(id, Name);

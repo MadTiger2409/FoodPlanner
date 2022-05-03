@@ -9,7 +9,7 @@ namespace FoodPlanner.WebApi.ActionParameters.Product
         public string Name
         {
             get => name;
-            set => name = value.Trim().ToLowerInvariant();
+            set => name = value?.Trim().ToLowerInvariant();
         }
 
         public int CategoryId { get; set; }
