@@ -10,23 +10,11 @@ pool:
   vmImage: windows-latest
 
 stages:
-- stage: Build
+- stage: Tests
   jobs:
   - job: Build_And_Test
     steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore packages for Domain module'
-      inputs:
-        command: 'restore'
-        projects: '**/Domain.csproj'
-        feedsToUse: 'select'
-        
-    - task: DotNetCoreCLI@2
-      displayName: 'Build Domain module'
-      inputs:
-        command: 'build'
-        projects: '**/Domain.csproj'
-        
+
     - task: DotNetCoreCLI@2
       displayName: 'Restore packages for Domain tests'
       inputs:
@@ -39,4 +27,18 @@ stages:
       inputs:
         command: 'test'
         projects: '**/Domain.Tests.csproj'
+        feedsToUse: 'select'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore packages for WebAPI tests'
+      inputs:
+        command: 'restore'
+        projects: '**/WebApi.Tests.csproj'
+        feedsToUse: 'select'
+        
+    - task: DotNetCoreCLI@2
+      displayName: 'Run WebAPI tests'
+      inputs:
+        command: 'test'
+        projects: '**/WebApi.Tests.csproj'
         feedsToUse: 'select'
