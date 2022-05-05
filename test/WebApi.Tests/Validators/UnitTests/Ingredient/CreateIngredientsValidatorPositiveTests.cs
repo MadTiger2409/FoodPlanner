@@ -25,7 +25,7 @@ namespace WebApi.Tests.Validators.UnitTests.Ingredient
         {
             var result = validator.TestValidate(ingredients);
 
-            result.ShouldNotHaveValidationErrorFor(m => m);
+            result.ShouldNotHaveAnyValidationErrors();
         }
     }
 }
