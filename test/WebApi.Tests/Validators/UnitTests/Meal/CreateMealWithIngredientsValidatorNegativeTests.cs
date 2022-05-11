@@ -1,4 +1,5 @@
-﻿using FluentValidation.TestHelper;
+﻿using FluentAssertions;
+using FluentValidation.TestHelper;
 using FoodPlanner.WebApi.ActionParameters.Ingredient;
 using FoodPlanner.WebApi.ActionParameters.Meal;
 using FoodPlanner.WebApi.Validators.Meal;
@@ -10,11 +11,11 @@ using Xunit;
 namespace WebApi.Tests.Validators.UnitTests.Meal
 {
     [Trait("Unit tests", "Validators")]
-    public class CreateMealWithIngredientsValidatorPositiveTests : ValidatorTestsBase<CreateMealWithIngredientsValidator>
+    public class CreateMealWithIngredientsValidatorNegativeTests : ValidatorTestsBase<CreateMealWithIngredientsValidator>
     {
         [Theory]
-        [MealValidatorCorrectNameData]
-        public void Should_Pass_Validation_For_Name(string name)
+        [MealValidatorIncorrectNameData]
+        public void Should_Fail_Validation_For_Name(string name)
         {
             var model = new CreateMealWithIngredients
             {
@@ -23,16 +24,16 @@ namespace WebApi.Tests.Validators.UnitTests.Meal
                 {
                     new() { Amount = 1f, ProductId = 1, UnitId = 2 }
                 }
-            };
 
+            };
             var result = validator.TestValidate(model);
 
-            result.ShouldNotHaveValidationErrorFor(m => m.Name);
+            result.ShouldHaveValidationErrorFor(m => m.Name);
         }
 
         [Theory]
-        [IngredientsValidatorCorrectCountData]
-        public void Should_Pass_Validation_For_Items_Count(List<CreateIngredient> ingredients)
+        [IngredientsValidatorIncorrectCountData]
+        public void Should_Fail_Validation_For_Items_Count(List<CreateIngredient> ingredients)
         {
             var model = new CreateMealWithIngredients
             {
@@ -42,12 +43,12 @@ namespace WebApi.Tests.Validators.UnitTests.Meal
 
             var result = validator.TestValidate(model);
 
-            result.ShouldNotHaveValidationErrorFor(m => m.Ingredients.Count);
+            result.ShouldHaveValidationErrorFor(m => m.Ingredients.Count);
         }
 
         [Theory]
-        [IngredientsValidatorCorrectItemsData]
-        public void Should_Pass_Validation_For_Items_Correctness(List<CreateIngredient> ingredients)
+        [IngredientsValidatorIncorrectItemsData]
+        public void Should_Fail_Validation_For_Items_Correctness(List<CreateIngredient> ingredients)
         {
             var model = new CreateMealWithIngredients
             {
@@ -57,7 +58,7 @@ namespace WebApi.Tests.Validators.UnitTests.Meal
 
             var result = validator.TestValidate(model);
 
-            result.ShouldNotHaveValidationErrorFor(m => m.Ingredients);
+            result.Errors.Should().NotBeEmpty().And.HaveCountGreaterThanOrEqualTo(1);
         }
     }
 }
