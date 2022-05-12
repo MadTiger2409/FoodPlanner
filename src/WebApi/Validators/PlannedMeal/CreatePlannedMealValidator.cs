@@ -12,10 +12,7 @@ namespace FoodPlanner.WebApi.Validators.PlannedMeal
                 .GreaterThan(0);
 
             RuleFor(x => x.OrdinalNumber)
-                .GreaterThan((byte)0);
-
-            RuleFor(x => x.OrdinalNumber)
-                .LessThanOrEqualTo((byte)255);
+                .InclusiveBetween((byte)1, (byte)255);
 
             RuleFor(x => x.ScheduledFor.Date)
                 .GreaterThanOrEqualTo(DateTime.UtcNow.Date);
