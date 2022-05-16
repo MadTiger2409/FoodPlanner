@@ -12,7 +12,7 @@ namespace WebApi.Tests.Validators.UnitTests.PlannedMeal
     {
         [Theory]
         [GetPlannedMealsValidatorCorrectDatesData]
-        public void Should_Pass_Validation_For_StartDate(DateTime fromDate, DateTime toDate)
+        public void Should_Pass_Validation_For_Dates(DateTime fromDate, DateTime toDate)
         {
             var model = new GetPlannedMeals { From = fromDate, To = toDate };
 
