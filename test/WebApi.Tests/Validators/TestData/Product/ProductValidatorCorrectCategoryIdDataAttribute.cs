@@ -2,15 +2,14 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace WebApi.Tests.Validators.TestData.Ingredient
+namespace WebApi.Tests.Validators.TestData.Product
 {
-    public class IngredientValidatorCorrectProductIdDataAttribute : DataAttribute
+    public class ProductValidatorCorrectCategoryIdDataAttribute : DataAttribute
     {
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
             yield return new object[] { 1 };
-            yield return new object[] { 75 };
-            yield return new object[] { 68676826 };
+            yield return new object[] { 7895 };
         }
     }
 }

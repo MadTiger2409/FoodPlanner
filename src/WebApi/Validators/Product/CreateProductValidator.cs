@@ -11,6 +11,9 @@ namespace FoodPlanner.WebApi.Validators.Product
                 .NotEmpty()
                 .MinimumLength(2)
                 .MaximumLength(100);
+
+            RuleFor(x => x.CategoryId)
+                .GreaterThanOrEqualTo(1);
         }
     }
 }
