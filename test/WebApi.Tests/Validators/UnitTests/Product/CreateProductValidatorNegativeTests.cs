@@ -13,10 +13,20 @@ namespace WebApi.Tests.Validators.UnitTests.Product
         [ProductValidatorIncorrectNameData]
         public void Should_Fail_Validation_For_Name(string name)
         {
-            var model = new CreateProduct { Name = name };
+            var model = new CreateProduct { Name = name, CategoryId = 1 };
             var result = validator.TestValidate(model);
 
             result.ShouldHaveValidationErrorFor(m => m.Name);
+        }
+
+        [Theory]
+        [ProductValidatorIncorrectCategoryIdData]
+        public void Should_Fail_Validation_For_CategoryId(int categoryId)
+        {
+            var model = new CreateProduct { Name = "Tomato", CategoryId = categoryId };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(m => m.CategoryId);
         }
     }
 }

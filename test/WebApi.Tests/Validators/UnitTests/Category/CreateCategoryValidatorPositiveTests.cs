@@ -1,7 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using FoodPlanner.WebApi.ActionParameters.Category;
 using FoodPlanner.WebApi.Validators.Category;
-using System;
 using WebApi.Tests.Validators.TestData.Category;
 using Xunit;
 

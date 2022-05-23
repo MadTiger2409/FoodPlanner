@@ -1,5 +1,4 @@
 ﻿using FoodPlanner.WebApi.ActionParameters.Ingredient;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Xunit.Sdk;
