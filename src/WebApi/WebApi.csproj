@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>FoodPlanner.WebApi</RootNamespace>
+    <StartupObject>FoodPlanner.WebApi.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
