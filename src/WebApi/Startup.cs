@@ -33,7 +33,7 @@ namespace FoodPlanner.WebApi
                 options.AddPolicy(name: "clientPolicy",
                     builder =>
                     {
-                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("*");
                     });
             });
 
