@@ -28,14 +28,7 @@ namespace FoodPlanner.WebApi
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: "clientPolicy",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("*");
-                    });
-            });
+            services.AddCors();
 
             services.AddControllers(options =>
             {
@@ -71,7 +64,7 @@ namespace FoodPlanner.WebApi
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors("clientPolicy");
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("*"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
