@@ -1,7 +1,6 @@
 ﻿using FoodPlanner.WebApi.Filters.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Filters
