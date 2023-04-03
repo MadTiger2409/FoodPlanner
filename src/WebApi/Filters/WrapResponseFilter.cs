@@ -27,8 +27,7 @@ namespace FoodPlanner.WebApi.Filters
 						break;
 				}
 
-				context.Result = new ObjectResult(wraper);
-				context.HttpContext.Response.StatusCode = (int)response.StatusCode;
+				context.Result = new ObjectResult(wraper) { StatusCode = response.StatusCode };
 			}
 
 			await next();
