@@ -1,14 +1,12 @@
-﻿using FoodPlanner.Application.MediatR.Ingredient.Commands;
-using FoodPlanner.WebApi.ActionParameters.Ingredient;
+﻿using FoodPlanner.WebApi.ActionParameters.Ingredient;
 using FoodPlanner.WebApi.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
 {
-    [Route("webapi/meals/{id}/ingredients")]
+	[Route("webapi/meals/{id}/ingredients")]
     public class IngredientController : ApiControllerBase
     {
         [HttpPost]

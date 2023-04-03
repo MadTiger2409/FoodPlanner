@@ -1,12 +1,11 @@
-﻿using FoodPlanner.Application.MediatR.Unit.Commands;
-using FoodPlanner.Application.MediatR.Unit.Queries;
+﻿using FoodPlanner.Application.MediatR.Unit.Queries;
 using FoodPlanner.WebApi.ActionParameters.Unit;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
 {
-    [Route("webapi/units")]
+	[Route("webapi/units")]
     public class UnitController : ApiControllerBase
     {
         [HttpPost]
