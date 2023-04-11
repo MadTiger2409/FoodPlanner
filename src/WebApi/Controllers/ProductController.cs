@@ -1,43 +1,52 @@
-﻿using FoodPlanner.Application.MediatR.Product.Queries;
+﻿using FoodPlanner.Application.MediatR.Product.Commands;
+using FoodPlanner.Application.MediatR.Product.Queries;
 using FoodPlanner.WebApi.ActionParameters.Product;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace FoodPlanner.WebApi.Controllers
 {
-    [Route("webapi/products")]
-    public class ProductController : ApiControllerBase
-    {
-        [HttpPost]
-        public async Task<IActionResult> CreateProductAsync([FromBody] CreateProduct command)
-        {
-            var product = await Mediator.Send(command.GetCreateProductCommand());
+	[Route("webapi/products")]
+	public class ProductController : ApiControllerBase
+	{
+		[HttpPost]
+		public async Task<IActionResult> CreateProductAsync([FromBody] CreateProduct command)
+		{
+			var product = await Mediator.Send(command.GetCreateProductCommand());
 
-            return Created($"{Request.Host}{Request.Path}/{product.Id}", product);
-        }
+			return Created($"{Request.Host}{Request.Path}/{product.Id}", product);
+		}
 
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProduct command, int id)
-        {
-            var product = await Mediator.Send(command.GetUpdateProductCommand(id));
+		[HttpPut("{id:int}")]
+		public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProduct command, int id)
+		{
+			var product = await Mediator.Send(command.GetUpdateProductCommand(id));
 
-            return Ok(product);
-        }
+			return Ok(product);
+		}
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetProductAsync(int id)
-        {
-            var product = await Mediator.Send(new GetProductByIdQuery(id));
+		[HttpDelete("{id:int}")]
+		public async Task<IActionResult> DeleteProductAsync(int id)
+		{
+			await Mediator.Send(new DeleteProductCommand(id));
 
-            return Ok(product);
-        }
+			return NoContent();
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> GetProductsAsync([FromQuery] string name)
-        {
-            var products = await Mediator.Send(new GetProductsQuery(name));
+		[HttpGet("{id:int}")]
+		public async Task<IActionResult> GetProductAsync(int id)
+		{
+			var product = await Mediator.Send(new GetProductByIdQuery(id));
 
-            return Ok(products);
-        }
-    }
+			return Ok(product);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetProductsAsync([FromQuery] string name)
+		{
+			var products = await Mediator.Send(new GetProductsQuery(name));
+
+			return Ok(products);
+		}
+	}
 }

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodPlanner.Infrastructure.Persistence.Configurations
 {
-	public class ProductConfiguration : IEntityTypeConfiguration<Product>
+	public class IngredientConfiguration : IEntityTypeConfiguration<Ingredient>
 	{
-		public void Configure(EntityTypeBuilder<Product> builder)
+		public void Configure(EntityTypeBuilder<Ingredient> builder)
 		{
-			builder.Property(x => x.Name)
+			builder.Property(x => x.Amount)
 				.IsRequired();
 
 			builder.HasQueryFilter(x => !x.Deleted);

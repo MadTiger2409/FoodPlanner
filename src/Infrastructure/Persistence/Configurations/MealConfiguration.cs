@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodPlanner.Infrastructure.Persistence.Configurations
 {
-	public class ProductConfiguration : IEntityTypeConfiguration<Product>
+	public class MealConfiguration : IEntityTypeConfiguration<Meal>
 	{
-		public void Configure(EntityTypeBuilder<Product> builder)
+		public void Configure(EntityTypeBuilder<Meal> builder)
 		{
 			builder.Property(x => x.Name)
 				.IsRequired();

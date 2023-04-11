@@ -3,7 +3,6 @@ using FoodPlanner.Application.Common.Exceptions;
 using FoodPlanner.Application.Common.Interfaces;
 using FoodPlanner.Application.Mappings.Dtos.Ingredient;
 using FoodPlanner.Application.MediatR.Ingredient.Commands;
-using FoodPlanner.Application.MediatR.Meal.Queries;
 using FoodPlanner.Domain.Comparers;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 {
-    public class CreateIngredientsHandler : IRequestHandler<CreateIngredientsCommand, List<IngredientDto>>
+	public class CreateIngredientsHandler : IRequestHandler<CreateIngredientsCommand, List<IngredientDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
