@@ -16,7 +16,7 @@ namespace FoodPlanner.Application.MediatR.Product.Handlers
 
 		public async Task<global::MediatR.Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
 		{
-			var product = await _context.Products.Include(x => x.Ingredients).SingleOrDefaultAsync(x => x.Id == request.Id);
+			var product = await _context.Products.Include(x => x.Ingredients).FirstOrDefaultAsync(x => x.Id == request.Id);
 
 			if (product == null)
 				throw new EntityNotFoundException(nameof(request.Id));

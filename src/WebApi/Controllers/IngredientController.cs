@@ -1,4 +1,5 @@
-﻿using FoodPlanner.WebApi.ActionParameters.Ingredient;
+﻿using FoodPlanner.Application.MediatR.Ingredient.Commands;
+using FoodPlanner.WebApi.ActionParameters.Ingredient;
 using FoodPlanner.WebApi.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -7,22 +8,30 @@ using System.Threading.Tasks;
 namespace FoodPlanner.WebApi.Controllers
 {
 	[Route("webapi/meals/{id}/ingredients")]
-    public class IngredientController : ApiControllerBase
-    {
-        [HttpPost]
-        public async Task<IActionResult> CreateIngredientsAsync([FromBody] List<CreateIngredient> command, int id)
-        {
-            var ingredients = await Mediator.Send(command.GetCreateIngredientsCommand(id));
+	public class IngredientController : ApiControllerBase
+	{
+		[HttpPost]
+		public async Task<IActionResult> CreateIngredientsAsync([FromBody] List<CreateIngredient> command, int id)
+		{
+			var ingredients = await Mediator.Send(command.GetCreateIngredientsCommand(id));
 
-            return Created($"{Request.Host}{Request.Path}/", ingredients);
-        }
+			return Created($"{Request.Host}{Request.Path}/", ingredients);
+		}
 
-        [HttpPut("{ingredientId}")]
-        public async Task<IActionResult> UpdateIngredientAsync([FromBody] UpdateIngredient command, int id, int ingredientId)
-        {
-            var ingredient = await Mediator.Send(command.GetUpdateIngredientCommand(id, ingredientId));
+		[HttpPut("{ingredientId:int}")]
+		public async Task<IActionResult> UpdateIngredientAsync([FromBody] UpdateIngredient command, int id, int ingredientId)
+		{
+			var ingredient = await Mediator.Send(command.GetUpdateIngredientCommand(id, ingredientId));
 
-            return Ok(ingredient);
-        }
-    }
+			return Ok(ingredient);
+		}
+
+		[HttpDelete("{ingredientId:int}")]
+		public async Task<IActionResult> DeleteIngredientAsync(int id, int ingredientId)
+		{
+			await Mediator.Send(new DeleteIngredientCommand(id, ingredientId));
+
+			return NoContent();
+		}
+	}
 }
