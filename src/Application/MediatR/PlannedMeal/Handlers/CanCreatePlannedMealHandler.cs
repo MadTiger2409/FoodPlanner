@@ -14,7 +14,7 @@ namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
 
         public CanCreatePlannedMealHandler(ISender mediator) => _mediator = mediator;
 
-        public async Task<global::MediatR.Unit> Handle(CanCreatePlannedMealQuery request, CancellationToken cancellationToken)
+        public async Task Handle(CanCreatePlannedMealQuery request, CancellationToken cancellationToken)
         {
             if (await _mediator.Send(new DoesMealExistByIdQuery(request.MealId)) == false)
                 throw new EntityNotFoundException(nameof(request.MealId));
@@ -24,8 +24,6 @@ namespace FoodPlanner.Application.MediatR.PlannedMeal.Handlers
 
             if (await _mediator.Send(new DoesPlannedMealExistByDateAndOrdinalNumberQuery(request.ScheduledFor, request.OrdinalNumber)))
                 throw new ArgumentException($"There is already meal with ordinal number {request.OrdinalNumber} planned for {request.ScheduledFor.Date}");
-
-            return global::MediatR.Unit.Value;
         }
     }
 }

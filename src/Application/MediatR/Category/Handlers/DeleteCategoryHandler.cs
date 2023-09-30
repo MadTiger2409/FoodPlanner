@@ -8,28 +8,26 @@ using System.Threading.Tasks;
 
 namespace FoodPlanner.Application.MediatR.Category.Handlers
 {
-	public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryCommand>
-	{
-		private readonly IApplicationDbContext _context;
+    public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryCommand>
+    {
+        private readonly IApplicationDbContext _context;
 
-		public DeleteCategoryHandler(IApplicationDbContext context) => _context = context;
+        public DeleteCategoryHandler(IApplicationDbContext context) => _context = context;
 
-		public async Task<global::MediatR.Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
-		{
-			var category = await _context.Categories.Include(x => x.Products).SingleOrDefaultAsync(x => x.Id == request.Id);
+        public async Task Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
+        {
+            var category = await _context.Categories.Include(x => x.Products).SingleOrDefaultAsync(x => x.Id == request.Id);
 
-			if (category == null)
-				throw new EntityNotFoundException(nameof(request.Id));
+            if (category == null)
+                throw new EntityNotFoundException(nameof(request.Id));
 
-			if (category.Products.Count > 0)
-				throw new EntityNotRemovableException(category.Products.Count);
+            if (category.Products.Count > 0)
+                throw new EntityNotRemovableException(category.Products.Count);
 
-			category.Deleted = true;
+            category.Deleted = true;
 
-			_context.Categories.Update(category);
-			await _context.SaveChangesAsync(cancellationToken);
-
-			return global::MediatR.Unit.Value;
-		}
-	}
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+    }
 }

@@ -16,7 +16,7 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 
         public CanUpdateIngredientHandler(ISender mediator) => _mediator = mediator;
 
-        public async Task<global::MediatR.Unit> Handle(CanUpdateIngredientQuery request, CancellationToken cancellationToken)
+        public async Task Handle(CanUpdateIngredientQuery request, CancellationToken cancellationToken)
         {
             if (await _mediator.Send(new DoesIngredientExistByIdQuery(request.IngredientId)) == false)
                 throw new EntityNotFoundException(nameof(request.IngredientId));
@@ -32,8 +32,6 @@ namespace FoodPlanner.Application.MediatR.Ingredient.Handlers
 
             if (await _mediator.Send(new DoesUnitExistByIdQuery(request.UnitId)) == false)
                 throw new EntityNotFoundException(nameof(request.UnitId));
-
-            return global::MediatR.Unit.Value;
         }
     }
 }
